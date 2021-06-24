@@ -20,7 +20,7 @@
             <div class="card-detail">
                 <h3>Timing</h3>
                 <div class="card-detail-data">
-                    <span>All day</span>
+                    <span>{{timeString}}</span>
                 </div>
                 
             </div>
@@ -32,6 +32,7 @@
     </div>
 </template>
 <script>
+import {getTimeString, formatTime} from '@/utils/time-utils';
 export default {
     name: 'MenuCard',
     props: [
@@ -42,6 +43,14 @@ export default {
             days: ['M','T','W','T','F','S','S'],
             showOptions : false
         }
+    },
+    computed:{
+        timeString(){
+            const openTime = this.menu.openTime;
+            const closeTime = this.menu.closeTime;
+            return `${getTimeString(formatTime(openTime.hours), formatTime( openTime.minutes))} - ${getTimeString(formatTime(closeTime.hours), formatTime( closeTime.minutes))}`
+        }
+
     },
     methods: {
         deleteMenu(){

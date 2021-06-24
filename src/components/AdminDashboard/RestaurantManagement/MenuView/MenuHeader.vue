@@ -33,6 +33,7 @@
     </div> -->
 </template>
 <script>
+import {getTimeString, formatTime} from '@/utils/time-utils';
 export default {
     name: 'MenuHeader',
     props: [
@@ -47,7 +48,7 @@ export default {
         timeString(){
             const openTime = this.menu.openTime;
             const closeTime = this.menu.closeTime;
-            return `${openTime.hours}:${openTime.minutes} - ${closeTime.hours}:${closeTime.minutes}`;
+            return `${getTimeString(formatTime(openTime.hours), formatTime( openTime.minutes))} - ${getTimeString(formatTime(closeTime.hours), formatTime( closeTime.minutes))}`
         }
     },
     methods: {
