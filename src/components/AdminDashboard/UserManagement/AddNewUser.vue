@@ -1,0 +1,130 @@
+<template>
+    <div class="create-user-panel">
+        <h1 class="heading heading-primary">Create User</h1>
+        <div class="form-wrapper">
+            <form novalidate>
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" class="form-element" v-model="form.name">
+                </div>
+                <!-- <div class="form-group">
+                    <div class="form-element">
+                        <label for="file-upload">User's Photo</label> <input type="file" accept="image/*" id="file-upload">
+                    </div>                    
+                </div> -->
+                <div class="form-group">
+                    <select name="role" v-model="form.role" class="form-element">
+                        <option value="">--select-role--</option>
+                        <option value="admin">Admin</option>
+                        <option value="employee">Employee</option> 
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-element" placeholder="Username" v-model="form.username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-element" placeholder="Password" v-model="form.password">
+                </div>
+             
+                <div class="btn-panel">
+                    <a href="" class="link-unstyled btn-icon" @click.prevent='saveUser' title="save user">
+                        <i class="far fa-check-circle"></i>
+                    </a>
+                    <a href="" class="link-unstyled btn-icon btn-cancel" @click.prevent='cancel' title="cancel user">
+                        <i class="far fa-times-circle"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    name: 'AddEditUser',
+    props: {
+        user: {
+            default : function(){
+                return {}
+            }
+        }
+    },
+    data(){
+        return {
+            form: {
+                name: '',
+                username: '',
+                password: '',
+                role: '',
+            }
+        }
+    },
+    created(){
+        if(Object.keys(this.user).length !== 0){
+            this.form.name = this.user.name
+            this.form.username = this.user.username
+            this.form.password = this.user.password
+            this.form.role = this.user.role
+        }
+    },
+    methods: {
+        saveUser(){
+            this.$emit('save-user', this.form);
+        },
+        cancel(){
+            this.$emit('cancel');
+        }
+    }
+}
+</script>
+<style scoped>
+.create-user-panel{
+    padding: 2em;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.heading{
+    /* padding-bottom: 1em; */
+    /* padding-left: 1em; */
+}
+
+.form-wrapper{
+    
+}
+.form-group{
+
+}
+.form-element{
+    padding: 1rem 1rem;
+    width: 20em;
+    font-size: 1.2em;
+    border: 0 solid #999;
+    /* border-bottom: 1px solid rgb(33, 20, 20); */
+    display: flex;
+    justify-content: space-between;
+}
+label{
+    font-size: .8em;
+}
+.form-element:focus{
+    /* background-color: #f8f8f8; */
+    outline: 0;
+    
+}
+input{
+    border-bottom: 1px solid #000;
+}
+.btn-panel{
+    margin: 1em 0 0;
+}
+.btn-icon{
+    border-radius: 50%;
+    font-size: 2em;
+    padding: 0 .5em;
+}
+.btn-icon:hover{
+    color: #673AB7
+}
+.btn-cancel:hover{
+    color: crimson;
+}
+</style>
