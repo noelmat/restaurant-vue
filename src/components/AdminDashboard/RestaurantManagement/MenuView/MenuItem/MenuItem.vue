@@ -13,9 +13,11 @@
                 ₹ {{item.price}}
             </div>
             <div class="spice-level">
+                <span>{{ item.spiceLevel}}</span> 
                 <i class="fas fa-pepper-hot" v-for="n in 5" :class="{'active': n<=item.spiceLevel}" :key="n"></i>
             </div>
             <div class="rating">
+                <span>{{ item.rating}}</span>
                 <i class="fa-star" v-for="n in 5" :class="{'fas': n<=item.rating, 'far': !n<item.rating}" :key="n"></i>
 
             </div>
@@ -78,7 +80,6 @@ export default {
     width: 90%;
     border-radius: 5px;
     border: 1px solid #000;
-    /* box-shadow: 0 2px 4px 0px rgba(0,0,0,0.3); */
     margin: .4em 0;
     display: flex;
     flex-direction: column;
@@ -87,23 +88,40 @@ export default {
 .menu-item-line{
     display: flex;
     justify-content: space-between;
-    padding: .8em .8em .4em;
+    padding: .4em .5em .4em;
 
-}
-.menu-item-details{
-    /* width: 60% */
 }
 .menu-description{
     padding: .8em;
     display: flex;
 }
-
+.spice-level i{
+    display: none;
+}
+.spice-level span{
+    margin-right: .4em;
+    font-weight: bold;
+}
+.spice-level i:first-of-type{
+    display: initial;
+}
 .spice-level i{
     color: #aaa;
 }
 .spice-level .active{
     color: crimson;
 }
+.rating i{
+    display: none;
+}
+.rating span{
+    margin-right: .4em;
+    font-weight: bold;
+}
+.rating i:first-of-type{
+    display: initial;
+}
+
 .description{
     width: 100%;
     border-radius: 10px;
@@ -115,5 +133,17 @@ export default {
     background-color: #673AB7;
     padding: .2em 1em;
     color: #fff;
+}
+
+@media (min-width: 600px) {
+    .spice-level span{
+        display: none;
+    }
+}
+@media (min-width: 900px) {
+    .menu-item-line{
+        padding: .8em .8em .4em;
+    }
+  
 }
 </style>

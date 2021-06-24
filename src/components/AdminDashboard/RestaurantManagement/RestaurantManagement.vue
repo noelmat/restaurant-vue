@@ -104,8 +104,14 @@ export default {
 </script>
 <style scoped>
 .restaurant-management {
-  margin: 2em 3em 0 4.5em;
+  margin: .5em 1em 0 2em;
+  /* font-size: .6em; */
   min-height: 100vh;
+}
+@media (min-width: 900px) {
+  .restaurant-management{
+      margin: 2em 3em 0 4.5em;
+  }
 }
 .heading {
   margin-left: 5px;

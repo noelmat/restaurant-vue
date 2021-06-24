@@ -62,7 +62,8 @@ export default {
 <style scoped>
 .card{
     flex-basis: 30%;
-    min-width: 250px;
+    min-width: 210px;
+    /* width: 210px; */
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 1px 5px 1px rgba(0,0,0,0.2);
@@ -71,6 +72,23 @@ export default {
     align-items: center;
     flex-direction: column;
     margin-bottom: 2em;
+    font-size: .8em;
+}
+@media (min-width:900px) {
+    .card{
+        flex-basis: 30%;
+        min-width: 250px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 1px 5px 1px rgba(0,0,0,0.2);
+        margin-right: 3.3%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 2em;
+        font-size: 1em;
+    }
+
 }
 .card-img-block{
     border-radius: 10px;
@@ -152,21 +170,5 @@ export default {
 .btn-primary{
     background-color: #673AB7;
 }
-/* .edit-menu{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: fit-content;
-    right: 2em;
-    bottom: 1.4em;
-    background-color: #fff;
-    border-radius: 5px;
-}
-.menu-item:first-of-type{
-    box-shadow: 0 1px 0 0 #000;
-}
-.menu-item a{
-    display: inline-block;
-    padding: .5em 1em;
-} */
+
 </style>

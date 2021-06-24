@@ -61,13 +61,14 @@ export default {
 <style scoped>
 
 .menu-header{
-    padding: 7em 0 1em 4em;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../../../../assets/breakfast.webp');
+    padding: 2em 0 .5em 1em;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../../../../assets/breakfast.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position:40% 30%;
     border-radius: 10px;
     position: relative;
+    /* font-size: .8em; */
 }
 .menu-subheader{
     color: #fff;
@@ -76,11 +77,13 @@ export default {
 }
 .heading{
     display: inline-block;
-    margin-bottom: 0px;
+    margin-bottom: 6px;
     color: #fff;
+    font-size: 1.4em;
 }
+
 .subheading-item{
-    margin-left: 1em;
+    margin-left: .5em;
 }
 .subheading-item:first-of-type{
     margin: 0;
@@ -88,7 +91,7 @@ export default {
 .day{
     font-weight: initial;
     border-radius: 50%;
-    font-size: 0.9em;
+    font-size: 0.8em;
     padding: 2px 5px;
     margin-left: 4px;
     color: #fff;
@@ -100,16 +103,42 @@ export default {
 .day-active{
     background-color: #673AB7;
 }
-
 .btn-edit{
     color: #fff;
     padding: .4em .8em;
     margin-left: 1em;
     position: relative;
-    top: -.4em
+    top: 0;
 }
-.btn-edit:hover{
-    color: #673AB7;
-    background-color: #fff;
+
+@media (min-width: 900px) {
+    .menu-header{
+        padding: 7em 0 1em 4em;
+    }
+    .heading{
+        display: inline-block;
+        margin-bottom: 0px;
+        color: #fff;
+        font-size: 28px;
+    }
+    .subheading-item{
+        margin-left: 1em;
+    }
+
+    .day{
+        font-size: .9em;
+    }
+    .btn-edit{
+        color: #fff;
+        padding: .4em .8em;
+        margin-left: 1em;
+        position: relative;
+        top: -.4em;
+    }
+    .btn-edit:hover{
+        color: #673AB7;
+        background-color: #fff;
+    }
 }
+
 </style>

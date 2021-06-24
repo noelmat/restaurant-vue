@@ -1,6 +1,6 @@
 <template>
     <div class="top-panel">
-        {{ $router.history.current.path }}
+        <!-- {{ $router.history.current.path }} -->
     </div>
 </template>
 <script>

@@ -141,10 +141,10 @@ export default {
 .menu-panel{
     background-color: #fff;
     box-shadow: 0 1px 5px 1px rgba(0,0,0,0.2);
-    margin: 3em 4em;
     border-radius: 10px;
+    margin: 1em;
+    font-size: .9em;
 }
-
 .heading-secondary{
     color: #333;
     align-self: flex-start;
@@ -152,11 +152,12 @@ export default {
 }
 .section-heading{
     display: inline-block;
-    margin: 1.5em 0 1em 2em;
+    margin: 1em 0 .5em 1em;
 }
 .menu-details{
-    padding-bottom: 2em;
+    padding-bottom: 1em;
 }
+
 .menu-list{
     display: flex;
     width: 100%;
@@ -172,5 +173,18 @@ export default {
     margin: 0 auto;
     color: navy;
     background-color: rgba(0, 0, 128, 0.178)
+}
+@media (min-width: 900px) {
+    .menu-panel{
+        margin: 3em 4em;
+        font-size: 1em;
+    }
+    .section-heading{
+        display: inline-block;
+        margin: 1.5em 0 1em 2em;
+    }
+    .menu-details{
+        padding-bottom: 2em;
+    }
 }
 </style> 

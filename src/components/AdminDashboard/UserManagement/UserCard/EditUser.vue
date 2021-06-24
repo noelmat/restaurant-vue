@@ -83,30 +83,27 @@ export default {
 </script>
 <style scoped>
 .create-user-panel{
-    padding: 2em;
+    padding: 1em;
     text-align: center;
     background-color: #fff;
     border-radius: 10px;
-}
-.heading{
-    /* padding-bottom: 1em; */
-    /* padding-left: 1em; */
+    font-size: .9em;
 }
 
-.form-wrapper{
-    
-}
-.form-group{
-
-}
 .form-element{
     padding: 1rem 1rem;
-    width: 20em;
+    /* width: 20em; */
     font-size: 1.2em;
     border: 0 solid #999;
     /* border-bottom: 1px solid rgb(33, 20, 20); */
     display: flex;
     justify-content: space-between;
+}
+
+@media (min-width: 900px) {
+   .create-user-panel{
+       padding: 2em;
+    } 
 }
 label{
     font-size: .8em;

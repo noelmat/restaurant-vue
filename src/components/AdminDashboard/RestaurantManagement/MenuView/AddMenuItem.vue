@@ -115,6 +115,17 @@ export default {
 .form-line{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+}
+.form-line > *{
+    width: 6em;
+}
+
+@media (min-width: 750px) {
+    .form-line{
+        display: flex;
+        align-items: center;
+    }
 }
 .form-line > *{
     margin-left: 1em;
@@ -145,4 +156,8 @@ export default {
 .btn-cancel:hover{
     color: crimson;
 }
+#special{
+    margin: .5em
+}
+
 </style>
