@@ -5,12 +5,21 @@ import RestaurantManagement from '@/components/AdminDashboard/RestaurantManageme
 import UserManagement from '@/components/AdminDashboard/UserManagement/UserManagement';
 import MenuView from '@/components/AdminDashboard/RestaurantManagement/MenuView/MenuView';
 import RestaurantLogin from '@/components/RestaurantLogin/RestaurantLogin';
+import CustomerLogin from '@/components/CustomerLogin/CustomerLogin';
+import HomePage from '@/components/CustomerView/HomePage';
+import Cart from '@/components/CustomerView/Cart';
 
 import Vue from 'vue';
 
 Vue.component('AdminDashboard', AdminDashboard);
 Vue.component('RestaurantManagement', RestaurantManagement);
+Vue.component('UserManagement', UserManagement);
+Vue.component('MenuView', MenuView);
 Vue.component('RestaurantLogin', RestaurantLogin);
+Vue.component('CustomerLogin', CustomerLogin);
+Vue.component('HomePage', HomePage);
+Vue.component('Cart', Cart);
+
 const router = new Router({
     mode: 'history',
     routes: [
@@ -48,11 +57,21 @@ const router = new Router({
             path: '/admin/login',
             component: RestaurantLogin
         },
-        // {
-        //     name: 'home',
-        //     path: '/',
-        //     component: HomePage
-        // },
+        {
+            name: 'customer-login',
+            path: '/login',
+            component: CustomerLogin
+        },
+        {
+            name: 'home',
+            path: '/',
+            component: HomePage
+        },
+        {
+            name: 'cart',
+            path: '/cart',
+            component: Cart
+        }
         // {
         //     name: 'pagenotfound',
         //     path: '*',
