@@ -4,7 +4,7 @@
             <div class="greeting">
                 {{name}}
             </div>
-            <a href="" class="logout" @click.prevent="logout"><i class="fas fa-sign-out-alt"></i><span>logout</span></a>
+            <a href="" class="logout" @click.prevent="confirmLogout"><i class="fas fa-sign-out-alt"></i><span>logout</span></a>
         </div>
         <router-link :to="{name: 'dashboard-home'}" class="link-unstyled sidepanel-link" active-class="active" exact>
             <i class="fas fa-home"></i><span>Home</span>
@@ -18,12 +18,24 @@
         <router-link :to="{name: 'dashboard-users'}" class="link-unstyled sidepanel-link" active-class="active">
             <i class="fas fa-users"></i><span>Users</span>
         </router-link>
+        <modal-component v-if="showConfirm"><confirm-box message="Do you want to log out?" buttonText="Logout" @cancel="cancelLogout" @confirm="logout"/></modal-component>
     </div>
 </template>
 <script>
 export default {
     name: 'SidePanel',
+    data(){
+        return{
+            showConfirm: false,
+        }
+    },
     methods: {
+        confirmLogout(){
+            this.showConfirm = true;
+        },
+        cancelLogout(){
+            this.showConfirm = false;
+        },
         logout(){
             this.$store.dispatch({
                 type: 'logout'
