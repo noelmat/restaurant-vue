@@ -18,7 +18,6 @@
         <router-link :to="{name: 'dashboard-users'}" class="link-unstyled sidepanel-link" active-class="active">
             <i class="fas fa-users"></i><span>Users</span>
         </router-link>
-        <modal-component v-if="showConfirm"><confirm-box message="Do you want to log out?" buttonText="Logout" @cancel="cancelLogout" @confirm="logout"/></modal-component>
     </div>
 </template>
 <script>
@@ -31,18 +30,12 @@ export default {
     },
     methods: {
         confirmLogout(){
-            this.showConfirm = true;
-        },
-        cancelLogout(){
-            this.showConfirm = false;
-        },
-        logout(){
             this.$store.dispatch({
-                type: 'logout'
-            }).then(()=> {
-                this.$router.push({name: 'restaurant-login'})
+                type: 'confirmLogout',
+                confirmLogout: true
             })
-        }
+        },
+
     },
     computed:{
         name(){
