@@ -29,22 +29,28 @@
                 {{ menuItem.description }}
             </div>
         </div>
-        <div class="add" :class="{'show-on-desktop': hovered}">
-            <a href="" class="link-unstyled" @click.prevent="">Add</a>
-        </div>
+        <a class="add link-unstyled" :class="{'show-on-desktop': hovered}" @click.prevent="addToCart">
+            <a class="link-unstyled">Add</a>
+        </a>
     </div>
     
 </template>
 <script>
+// import {POSITION} from 'vue-toastification';
 export default {
     name: 'MenuItem',
-    props: [
-        'menuItem'
-    ],
+    props: {
+        menuItem:{
+
+        },
+        cartItemId: {
+            default: '',
+        }
+    },
     data(){
         return {
             showFull : false,
-            hovered: false
+            hovered: false,
         }
     },
     methods:{
@@ -53,6 +59,18 @@ export default {
         },
         toggleHover(){
             this.hovered = !this.hovered;
+        },
+        addToCart(){
+            const item = {}
+            item.item = this.menuItem._id;
+            item.quantity = 1;
+            this.$store.dispatch({
+                type: 'addToCart',
+                item
+            }).then(()=>{
+                this.$toast.success(`${this.menuItem.name} Added`)
+            })
+
         }
     }
 }
@@ -67,6 +85,7 @@ export default {
     flex-direction: column;
     box-shadow: 0 1px 4px 1px rgba(0,0,0,0.1);
     background-color: #fff;
+    align-items: center;
 
 }
 
@@ -144,8 +163,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#fff;
+    background-color:#fc8019;
     margin: .6em 0;
+    width: 50px;
+
 }
 .add a{
     background-color:#fc8019 ;
@@ -164,6 +185,7 @@ export default {
     }
     .menu-item{
         flex-direction: row;
+        align-items: stretch;
     }
     .add{
         flex-basis: 15%;
@@ -176,11 +198,12 @@ export default {
         color: #fff;
         font-weight: bold;
         margin: 0;
-
+        cursor: pointer;
     }
     .add a{
         color: #fff;
-
+        border-radius: 10px;
+        
     }
     .add:hover{
         cursor: pointer;

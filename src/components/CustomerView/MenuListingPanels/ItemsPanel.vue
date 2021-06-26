@@ -27,14 +27,12 @@ export default {
 </script>
 <style scoped>
 .panel{
-    flex-basis: 70%;
+    flex-basis: auto;
     background-color: #f8f8f8;
-    padding: 2em;
-    position: absolute;
+    padding: 1em;
     height: 100%;
     overflow-y: scroll;
     left: 20%;
-    width: 80%;
 }
 .menu-list{
     display: flex;
@@ -44,6 +42,7 @@ export default {
 @media (min-width: 900px) {
     .panel{
         padding: 2em;
+        width: 100%;
     }
 }
 </style>

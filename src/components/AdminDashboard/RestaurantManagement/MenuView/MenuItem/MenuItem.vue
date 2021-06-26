@@ -23,13 +23,14 @@
             </div>
             <div class="btn-panel">
                 <a href="" class="link-unstyled" title="Edit item" @click.prevent="edit"><i class="fas fa-edit"></i></a>
-                <a href="" class="link-unstyled" title="Delete item" @click.prevent="deleteItem"><i class="fas fa-times-circle"></i></a>
+                <a href="" class="link-unstyled" title="Delete item" @click.prevent="requestDelete"><i class="fas fa-times-circle"></i></a>
             </div>
 
         </div>
         <div class="menu-item-line" >
             {{ item.description }}
         </div>
+        <ModalComponent v-if="showConfirm"><ConfirmBox :message="`Are you sure you want to delete : ${item.name}`" buttonText="Delete" @confirm="deleteItem" @cancel="cancelDelete"/></ModalComponent>
     </div>
     <EditMenuItem :menuItem="item"  @menu-item-updated="updateSuccess" @cancel="cancelEdit" v-else/>
     
@@ -48,10 +49,17 @@ export default {
     data(){
         return {
             editMode: false,
-            item: {...this.menuItem}
+            item: {...this.menuItem},
+            showConfirm: false
         }
     },
     methods:{
+        requestDelete(){
+            this.showConfirm = true;
+        },
+        cancelDelete(){
+            this.showConfirm = false;
+        },
         edit(){
             this.editMode = true;
         },
@@ -59,6 +67,7 @@ export default {
             this.editMode = false;
         },
         updateSuccess(event){
+            this.$toast.success(`Changes saved`)
             this.item = {
                 ...event
             }
@@ -67,6 +76,9 @@ export default {
             deleteMenuItem(this.item._id)
             .then(menuItem => {
                 this.$emit('delete-item', menuItem._id);
+                this.$toast.success(`${menuItem.name} deleted`, {
+                    timeout: 2000
+                })
             })
             .catch(err =>{
                 console.log(err)

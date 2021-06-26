@@ -32,6 +32,8 @@
 import { getMenus, postMenu, deleteMenu } from "@/services/admin/menus.js";
 import MenuCard from "./MenuCard";
 import AddEditMenu from "./MenuView/AddEditMenu.vue";
+import store from '@/store';
+
 export default {
   name: "MenuManagement",
   components: {
@@ -51,9 +53,16 @@ export default {
       menus.forEach((menu) => {
         this.$set(this.menus, menu._id, menu);
       });
-    });
+    }).catch(err => this.$toast.error(`${err.message} while loading menus`))
+    ;
   },
-  computed: {},
+  beforeRouteEnter(to, from, next){
+    if(store.state.authentication.role === 'admin'){
+      next();
+    }else{
+      next({name: from.name})
+    }
+  },
   methods: {
     addMenu() {
       this.addNewMenu = true;
@@ -71,9 +80,10 @@ export default {
           menus.forEach((menu) => {
             this.$set(this.menus, menu._id, menu);
           });
+          this.$toast.success(`${event.name} Menu Added`);
         })
         .catch((err) => {
-          console.log(err);
+          this.$toast.error(`${err.message} while adding Menu`);
         });
     },
     deleteMenuClicked(event) {

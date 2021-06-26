@@ -34,7 +34,7 @@ export default {
                 credentials: this.form
             })
             .then(()=>{
-                this.$router.push({name: 'dashboard-menus'})
+                this.$router.push({name: 'dashboard-home'})
             })
             .catch(err=> {
                 console.log(err);

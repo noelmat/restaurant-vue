@@ -69,10 +69,10 @@ export default {
                 return getMenu(this.menu._id)  
             })
             .then(data =>{
-                    Object.keys(data).forEach(key => {
-            this.$set(this.menu, key, data[key]);
-            })
-
+                Object.keys(data).forEach(key => {
+                this.$set(this.menu, key, data[key]);
+                })
+                this.$toast.success(`New Item Added : ${event.name}`)
             })    
             .catch(() => {
             })
@@ -91,9 +91,10 @@ export default {
                 Object.keys(data).forEach(key => {
                     this.$set(this.menu, key, data[key]);
                 })
+                this.$toast.success('Menu updated');
             })  
             .catch(err => {
-                console.log(err);
+                this.$toast(err.message)
             })
         },
         cancelEdit(){

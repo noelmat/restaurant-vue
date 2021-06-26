@@ -19,6 +19,7 @@
 import {postUser, getUsers} from '@/services/admin/users';
 import UserCard from './UserCard/UserCard';
 import AddNewUser from './AddNewUser.vue';
+import store from '@/store';
 export default {
     name: 'UserManagement',
     components: {
@@ -31,10 +32,20 @@ export default {
            addUser: false,
         }
     },
+    beforeRouteEnter(to, from, next){
+        if(store.state.authentication.role === 'admin'){
+            next()
+        }else{
+            next({name: from.name})
+        }
+    },
     created(){
         getUsers()
             .then(users => {
                 this.users.push(...users);
+            })
+            .catch(err => {
+                this.$toast.error(`${err.message} while fetching users`)
             })
     },
     computed:{
@@ -53,7 +64,12 @@ export default {
         saveUser(event){
             postUser(event)
                 .then(()=> {
-                    console.log('User Registered')
+                    this.$toast.success(`User added successfully`);
+                    this.cancelAddUser();
+                    return this.fetchUsers()
+                })
+                .catch(err=>{
+                    this.$toast.error(`${err.message} while adding users`)
                 })
         },
         cancelAddUser(){

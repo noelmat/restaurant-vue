@@ -3,6 +3,7 @@
         <Navigation/>
         <Header id="home"/>
         <MenuListing id="menu"/>
+        <Footer/>
     </div>
     
 </template>
@@ -10,20 +11,20 @@
 import Header from './Header.vue';
 import Navigation from './Navigation.vue';
 import MenuListing from './MenuListing.vue';
+import Footer from './Footer.vue';
 
 export default {
     name: "HomePage",
     components: {
         Header,
         Navigation,
-        MenuListing
+        MenuListing,
+        Footer
     },
-    methods:{
-        /**
-         * if !store customerLoggedIn
-         *      -> request for guestId
-         *      
-         */
+    created(){
+        this.$store.dispatch({
+            type: 'loadSession'
+        })
     }
 }
 </script>

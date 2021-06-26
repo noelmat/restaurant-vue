@@ -1,4 +1,5 @@
 import Router from 'vue-router';
+import store from '@/store';
 
 import AdminDashboard from '@/components/AdminDashboard/AdminDashboard';
 import RestaurantManagement from '@/components/AdminDashboard/RestaurantManagement/RestaurantManagement';
@@ -20,6 +21,10 @@ Vue.component('CustomerLogin', CustomerLogin);
 Vue.component('HomePage', HomePage);
 Vue.component('Cart', Cart);
 
+const meta = {
+    authorize : []
+};
+
 const router = new Router({
     mode: 'history',
     routes: [
@@ -27,25 +32,29 @@ const router = new Router({
             name: 'admin',
             path: '/admin/dashboard',
             component: AdminDashboard,
+            meta,
             children: [
                 {
                     name: 'dashboard-home',
                     path:'',
-
+                    meta
                 },
                 {
                     name: 'dashboard-users',
                     path: 'users',
+                    meta,
                     component: UserManagement
                 },
                 {
                     name: 'dashboard-menus',
                     path: 'menus',
+                    meta,
                     component: RestaurantManagement,
                 },
                 {
                     name: 'dashboard-menu-detail',
                     path: 'menus/:menuId',
+                    meta,
                     component: MenuView
                 }
             ]
@@ -53,7 +62,7 @@ const router = new Router({
 
         },
         {
-            name: 'restaurant-login',
+            name: 'admin-login',
             path: '/admin/login',
             component: RestaurantLogin
         },
@@ -72,13 +81,22 @@ const router = new Router({
             path: '/cart',
             component: Cart
         }
-        // {
-        //     name: 'pagenotfound',
-        //     path: '*',
-        //     component: RestaurantManagement
-        // }
     ]
 })
-
+router.beforeEach((to, from, next) =>{
+    if(to.meta.authorize && !store.getters.isAuthenticated){
+        next({
+            name: 'admin-login',
+        });
+    }else{
+        // if(['login', 'register'].indexOf(to.name) !== -1 && store.getters.isAuthenticated){
+        //     next({ name: 'dashboard-home'})
+        // }
+        // else{
+            next()
+        // }
+        
+    }
+})
 
 export default router;

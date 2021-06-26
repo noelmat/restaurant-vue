@@ -1,9 +1,9 @@
 <template>
     <div class="page">
         <!-- <SearchPanel/> -->
-        <div class="menu-header">
+        <!-- <div class="menu-header">
             <h2>Menus</h2>
-        </div>
+        </div> -->
         <div class="listing">
             <MenuPanel :menus="menus" @show-menu="showMenu"/>
             <ItemsPanel :menu="currentMenu" />
@@ -46,7 +46,6 @@ export default {
                     this.$set(this.currentMenu, key, menu[key]);
                  })
             })
-            
         }
     }
 }
@@ -56,7 +55,6 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    /* position: relative; */
 }
 .menu-header{
     display: flex;
@@ -70,5 +68,13 @@ export default {
     display: flex;
     flex-basis: 100%;
     position: relative;
+    flex-direction: column;  
+    height: 100vh;
+}
+
+@media (min-width: 900px) {
+    .listing{
+        flex-direction: row;  
+    }
 }
 </style>
