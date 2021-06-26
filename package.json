@@ -15,6 +15,8 @@
     "vue": "^2.6.11",
     "vue-router": "^3.5.2",
     "vue-scrollto": "^2.20.0",
+    "vue-toastification": "^1.7.11",
+    "vuelidate": "^0.7.6",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
