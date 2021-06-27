@@ -2,6 +2,7 @@
         <div class="panel">
             <div class="menu-list">
                 <MenuItem v-for="item in menu.menuItems" :key="item._id" :menuItem="item"/>
+                <span v-if="Object.keys(menu).length === 0">Select a menu to continue</span>
             </div>
 
         </div>
@@ -38,6 +39,11 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.menu-list span{
+    color: #aaa;
+    padding-top: 4em;
+    justify-self: center;
 }
 @media (min-width: 900px) {
     .panel{
