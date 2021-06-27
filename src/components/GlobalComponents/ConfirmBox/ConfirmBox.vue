@@ -33,7 +33,7 @@ export default {
 <style scoped>
 .wrapper{
     background-color: #fff;
-    padding: 3em;
+    padding: 1em;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -41,17 +41,22 @@ export default {
 }
 .message{
     font-weight: bold;
+    text-align: center;
+    
 }
 .btn-panel{
     display: flex;
     margin: 2em 0 0;
     width: 90%;
-    max-width: 250px;
+    max-width: 180px;
+    /* min-width: 200px; */
     justify-content: space-between;
 }
 .btn{
     color: #fff;
     border-radius: 5px;
+    padding: .8em;
+    font-size: .9em
 }
 .btn-confirm{
     background-color: rgb(211, 0, 42);

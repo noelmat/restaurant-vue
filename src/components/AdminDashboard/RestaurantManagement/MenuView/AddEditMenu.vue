@@ -34,9 +34,11 @@
                     </select>
                 </fieldset>
             </div>
-            <div class="form-group">
+            <div class="form-group avail">
                 <p>Availability</p>
-                <a class="day" v-for="n in 7" :class="{'day-active': form.availability[n-1]}" :key="n-1" @click.prevent="changeAvailability(n-1)">{{days[n-1]}}</a>
+                <div class="">
+                    <a class="day" v-for="n in 7" :class="{'day-active': form.availability[n-1]}" :key="n-1" @click.prevent="changeAvailability(n-1)">{{days[n-1]}}</a>
+                </div>
 
             </div>
             <div class="btn-panel">
@@ -174,6 +176,13 @@ label{
 
 .btn-cancel:hover{
     color: crimson;
+}
+.avail{
+    display: flex;
+    flex-direction: column;
+}
+.avail p{
+    padding-bottom: .8em;
 }
 @media (min-width:900px){
     .form-wrapper{

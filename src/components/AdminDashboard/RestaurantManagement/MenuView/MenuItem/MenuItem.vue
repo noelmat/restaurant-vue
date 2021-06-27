@@ -147,9 +147,12 @@ export default {
     color: #fff;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
     .spice-level span{
         display: none;
+    }
+    .spice-level i{
+        display: initial;
     }
 }
 @media (min-width: 900px) {
