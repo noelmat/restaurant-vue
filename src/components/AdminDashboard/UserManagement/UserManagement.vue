@@ -6,7 +6,7 @@
         </div>
         <h2 class="heading heading-secondary" v-if="employeeUsers.length !== 0">Employees</h2>
         <div class="user-panel">
-            <UserCard v-for="user in employeeUsers"  :key="user.id" :user="user"/>
+            <UserCard v-for="user in employeeUsers"  :key="user.id" :user="user" @user-updated='fetchUsers'/>
         </div>
         <a class="link-unstyled btn add-btn" @click.prevent="createUser">
             <i class="fas fa-plus"></i>
