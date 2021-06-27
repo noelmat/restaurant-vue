@@ -97,16 +97,18 @@ export default {
       deleteMenu(this.menuToDelete._id)
         .then(() => {
             this.showDeleteConfirm =false;
+            this.$toast.success(`${this.menuToDelete.name} deleted`)
           return getMenus();
         })
         .then((menus) => {
             this.menus = {}
           menus.forEach((menu) => {
             this.$set(this.menus, menu._id, menu);
+            
           });
         })
         .catch((err) => {
-          console.log(err);
+          this.$toast.error(`${err.message} while adding Menu`);
         });
     },
   },

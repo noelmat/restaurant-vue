@@ -56,14 +56,14 @@ export default {
             console.log('Clicked');
         },
         saveChanges(event){
-            console.log(event)
             updateUserDetails(this.user._id, event)
             .then(()=>{
                 this.$emit('user-updated');
                 this.edit = false;
+                this.$toast.success('Changes Saved');
             })
-            .catch(()=>{
-                
+            .catch(err=>{
+                this.$toast.error(`${err.message} while saving changes`)
             })
         }
     }
