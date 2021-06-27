@@ -55,7 +55,6 @@ export default {
     created(){
         if(Object.keys(this.user).length !== 0){
             this.form.name = this.user.name
-            // this.form.username = this.user.username
             this.form.password = ''
             this.form.role = this.user.role
         }
@@ -92,10 +91,8 @@ export default {
 
 .form-element{
     padding: 1rem 1rem;
-    /* width: 20em; */
     font-size: 1.2em;
     border: 0 solid #999;
-    /* border-bottom: 1px solid rgb(33, 20, 20); */
     display: flex;
     justify-content: space-between;
 }
@@ -109,7 +106,6 @@ label{
     font-size: .8em;
 }
 .form-element:focus{
-    /* background-color: #f8f8f8; */
     outline: 0;
     
 }
