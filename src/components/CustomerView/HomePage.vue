@@ -19,11 +19,13 @@ export default {
         Header,
         Navigation,
         MenuListing,
-        Footer
+        Footer,
     },
     created(){
         this.$store.dispatch({
             type: 'loadSession'
+        }).catch(error =>{
+            this.$toast.error(`${error.message} while loading session`)
         })
     }
 }

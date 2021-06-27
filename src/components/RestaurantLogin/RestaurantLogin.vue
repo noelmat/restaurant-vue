@@ -45,7 +45,7 @@ export default {
 </script>
 <style scoped>
 .wrapper {
-    padding: 1em 4em;
+    padding: 2em;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -59,6 +59,10 @@ export default {
 }
 .heading{
     color: #fff;
+    padding: 0;
+    margin: 0;
+    margin-bottom: .5em;
+    font-size: 1.7em;
 }
 .form{
 

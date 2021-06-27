@@ -1,9 +1,5 @@
 <template>
     <div class="page">
-        <!-- <SearchPanel/> -->
-        <!-- <div class="menu-header">
-            <h2>Menus</h2>
-        </div> -->
         <div class="listing">
             <MenuPanel :menus="menus" @show-menu="showMenu"/>
             <ItemsPanel :menu="currentMenu" />
@@ -13,13 +9,11 @@
 </template>
 <script>
 import {getMenus, getMenu} from '@/services/admin/menus'
-// import SearchPanel from './MenuListingPanels/SearchPanel.vue';
 import MenuPanel from './MenuListingPanels/MenuPanel.vue';
 import ItemsPanel from './MenuListingPanels/ItemsPanel.vue';
 export default {
     name: "MenuListing",
     components:{
-        // SearchPanel,
         MenuPanel,
         ItemsPanel
     },

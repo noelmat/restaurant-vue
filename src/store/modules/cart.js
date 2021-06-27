@@ -37,7 +37,7 @@ const cart = {
     },
     actions: {
         loadSession(context){
-            getSession()
+            return getSession()
                 .then(()=> {
                     return getCart()
                 })
@@ -59,10 +59,10 @@ const cart = {
                     })
 
                     localStorage.setItem(KEY_CARTID, cart._id);
-                })
-                .catch(err =>{
-                    console.log(err);
-                })    
+                    return Promise.resolve();
+                }).catch(error => {
+                    return Promise.reject(error)
+                });
         },
         addToCart(context, payload){
             const item = payload.item;
