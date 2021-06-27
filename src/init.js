@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Vuex from 'vuex';
 import VueScrollTo from 'vue-scrollto'
 import Toast, {POSITION} from 'vue-toastification';
+import Vuelidate from 'vuelidate';
 
 Vue.use(Router);
 Vue.use(Vuex);
@@ -11,6 +12,7 @@ Vue.use(Toast, {
     position: POSITION.TOP_RIGHT,
     timeout: 2000
 });
+Vue.use(Vuelidate);
 
 import "normalize.css/normalize.css";
 import "@fortawesome/fontawesome-free/css/all.css";

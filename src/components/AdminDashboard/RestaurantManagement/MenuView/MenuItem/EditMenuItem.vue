@@ -73,7 +73,7 @@ export default {
                     this.$emit('cancel')
                 })
                 .catch(error =>{
-                    console.log(error);
+                    this.$toast.error(`${error.message}`)
                 })
         },
         cancel(){
@@ -108,7 +108,13 @@ export default {
     border-radius: 0;
     border-bottom: 1px solid #000;
     margin: 2px;
+    background-color: #fff;
 }
+select.form-element{
+    min-width: 40px;
+    max-width: 40px;
+}
+
 .form-element:focus-visible{
     outline: 0;
 }
@@ -121,12 +127,7 @@ export default {
     width: 6em;
 }
 
-@media (min-width: 750px) {
-    .form-line{
-        display: flex;
-        align-items: center;
-    }
-}
+
 .form-line > *{
     margin-left: 1em;
 }
@@ -152,11 +153,27 @@ export default {
     border-radius: 50%;
     font-size: 2em;
     padding: 0 .5em;
+    color: #673AB7;
 }
-.btn-icon:hover{
-    color: #673AB7
-}
-.btn-cancel:hover{
+
+.btn-cancel{
     color: crimson;
 }
+@media (min-width: 750px) {
+    .form-line{
+        display: flex;
+        align-items: center;
+    }
+    .btn-icon{
+        color: #333;
+    }
+    .btn-icon:hover{
+        color: #673AB7
+    }
+    .btn-cancel:hover{
+        color: crimson;
+    }
+
+}
+
 </style>

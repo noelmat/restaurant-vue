@@ -4,25 +4,57 @@
         <div class="form-wrapper">
             <form novalidate>
                 <div class="form-group">
-                    <input type="text" placeholder="Full Name" class="form-element" v-model="form.name">
+                    <input type="text" placeholder="Full Name" class="form-element"  :class="{'error': $v.form.name.$error}" @blur="$v.form.name.$touch()" v-model="form.name">
+                    <div class="validation" v-if="$v.form.name.$error">
+                        Field required
+                    </div>
+
                 </div>
                 <!-- <div class="form-group">
                     <div class="form-element">
                         <label for="file-upload">User's Photo</label> <input type="file" accept="image/*" id="file-upload">
                     </div>                    
                 </div> -->
-                <div class="form-group">
-                    <select name="role" v-model="form.role" class="form-element">
+                <div class="form-group" >
+                    <select name="role" :class="{'error': $v.form.role.$error}" v-model="form.role" @blur="$v.form.role.$touch()" class="form-element">
                         <option value="">--select-role--</option>
                         <option value="admin">Admin</option>
                         <option value="employee">Employee</option> 
                     </select>
+                    <div class="validation" v-if="$v.form.role.$error">
+                        Field required
+                    </div>
+
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-element" placeholder="Username" v-model="form.username">
+                    <input type="text" class="form-element" placeholder="Username" v-model="form.username" @blur="$v.form.username.$touch()" :class="{'error': $v.form.username.$error}">
+                    <div class="validation" v-if="$v.form.username.$error">
+                        Field required
+                    </div>
+
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-element" placeholder="Password" v-model="form.password">
+                    <input type="password" class="form-element" placeholder="Password" v-model="form.password" @blur="$v.form.password.$touch()" :class="{'error': $v.form.password.$error}">
+                    <div class="validation" v-if="$v.form.password.$error">
+                        <template v-if="!$v.form.password.required">
+                            Field required
+                        </template>
+                        <template v-else-if="!$v.form.password.minLength">
+                            Minimum 8 characters required
+                        </template>
+                        <template v-else-if='!$v.form.password.containsUpperCase'>
+                            One uppercase letter required
+                        </template>
+                        <template v-else-if='!$v.form.password.containsLowerCase'>
+                            One lowercase letter required
+                        </template>
+                        <template v-else-if='!$v.form.password.containsNumber'>
+                            One number required
+                        </template>
+                        <template v-else-if='!$v.form.password.containsSpecial'>
+                            One special character required except '_'
+                        </template>
+                    </div>
                 </div>
              
                 <div class="btn-panel">
@@ -38,6 +70,8 @@
     </div>
 </template>
 <script>
+import { required, minLength } from 'vuelidate/lib/validators';
+
 export default {
     name: 'AddEditUser',
     props: {
@@ -57,6 +91,29 @@ export default {
             }
         }
     },
+    validations: {
+        form: {
+            name: {
+                required,
+            },
+            username: {
+                required,
+            },
+            password: {
+                required,
+                minLength: minLength(8),
+                containsUpperCase : (value) => /[A-Z]/.test(value),
+                containsLowerCase : (value) => /[a-z]/.test(value),
+                containsNumber : (value) => /[0-9]/.test(value),
+                containsSpecial : (value) => /[#?!@$%^&*-]/.test(value)
+
+            },
+            role: {
+                required,
+                
+            }
+        }
+    },
     created(){
         if(Object.keys(this.user).length !== 0){
             this.form.name = this.user.name
@@ -67,7 +124,13 @@ export default {
     },
     methods: {
         saveUser(){
-            this.$emit('save-user', this.form);
+            this.$v.form.$touch();
+            if(!this.$v.form.$invalid){
+                this.$emit('save-user', this.form);
+            }else{
+                this.$toast.error('Please check the inputs')
+            }
+            
         },
         cancel(){
             this.$emit('cancel');
@@ -88,9 +151,13 @@ export default {
     font-size: 1.2em;
     border: 0 solid #999;
     display: flex;
+    /* border-radius: 5px; */
     justify-content: space-between;
 }
-
+.form-group{
+    display: flex;
+    flex-direction: column;
+}
 @media (min-width: 900px) {
    .create-user-panel{
        padding: 2em;
@@ -120,5 +187,16 @@ input{
 }
 .btn-cancel:hover{
     color: crimson;
+}
+.validation{
+    font-size: .7em;
+    color: crimson;
+    margin-left: 2em;
+    text-align: left;
+    padding: .5em 0;
+}
+.error{
+    border-bottom: 1px solid crimson;
+    /* border-radius: 5px; */
 }
 </style>
