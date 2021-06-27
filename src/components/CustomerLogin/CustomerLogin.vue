@@ -1,11 +1,11 @@
 <template>
     <div class='wrapper'>
         <h1 class="heading ">
-            Restaurant Login
+            Customer Login
         </h1>
         <form class="form">
             <div class="form-group">
-                <input type="text" class="form-element" placeholder="Username" v-model="form.username">
+                <input type="text" class="form-element" placeholder="Email" v-model="form.email">
             </div>
             <div class="form-group">
                 <input type="password" class="form-element" placeholder="Password" v-model="form.password">
@@ -18,11 +18,11 @@
 </template>
 <script>
 export default {
-    name: 'RestaurantLogin',
+    name: 'CustomerLogin',
     data(){
         return {
             form: {
-                username: '',
+                email: '',
                 password: ''
             }
         }
@@ -30,11 +30,11 @@ export default {
     methods:{
         login(){
             this.$store.dispatch({
-                type: 'login',
+                type: 'customerLogin',
                 credentials: this.form
             })
             .then(()=>{
-                this.$router.push({name: 'dashboard-home'})
+                this.$router.push({name: 'dashboard-menus'})
             })
             .catch(err=> {
                 console.log(err);

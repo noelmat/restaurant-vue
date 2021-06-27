@@ -1,9 +1,9 @@
-import axios from 'axios';
+import service from './configureAxios';
 
 export const login = (credentials) => {
-    return axios.post(
+    return service().post(
         'http://localhost:3000/auth/usermanagement/login',
         {
             ...credentials
-        }).then(res => res.data);
+        });
 }

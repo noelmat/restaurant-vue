@@ -26,8 +26,13 @@ export default {
     display: flex;
     flex-direction: column;
     /* position: fixed; */
-    margin-left: 230px;
+    margin-left: 70px;
+    /* font-size: em; */
 }
-
+@media (min-width: 900px) {
+    .mainpanel{
+        margin-left: 230px;
+    }
+}
 
 </style>

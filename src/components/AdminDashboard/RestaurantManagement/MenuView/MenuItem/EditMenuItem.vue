@@ -2,7 +2,7 @@
     <form novalidate class="menu-item-new">
         <input type="text" class="form-element" name='name' v-model="form.name" placeholder="Item Name">
         <div class="form-line">
-        <input type="number" placeholder="Price" class="form-element" v-model="form.price">
+            <input type="number" placeholder="Price" class="form-element" v-model="form.price">
             <select name="spice" id="spice" class="form-element" v-model="form.spiceLevel" >
                 <option value="" disabled selected>--spice level--</option>
                 <option value="0">0</option>
@@ -115,12 +115,26 @@ export default {
 .form-line{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+}
+.form-line > *{
+    width: 6em;
+}
+
+@media (min-width: 750px) {
+    .form-line{
+        display: flex;
+        align-items: center;
+    }
 }
 .form-line > *{
     margin-left: 1em;
 }
 .form-line > *:first-child{
     margin: 0;
+}
+#special{
+    margin: .5em
 }
 .btn-panel{
     display: flex;

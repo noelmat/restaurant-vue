@@ -1,35 +1,39 @@
 <template>
     <div class="content-panel">
+        <modal-component v-if="showConfirm"><confirm-box message="Do you want to log out?" buttonText="Logout" @cancel="cancelLogout" @confirm="logout"/></modal-component>
         <router-view></router-view>
-        <!-- <AddNewUser/> -->
-        <!-- <UserManagement/> -->
-        <!-- <RestaurantManagement/> -->
-        <!-- <MenuView/> -->
     </div>    
 </template>
 <script>
-// import AddNewUser from '@/components/AdminDashboard/UserManagement/AddNewUser';
-// import UserManagement from '@/components/AdminDashboard/UserManagement/UserManagement';
-// import RestaurantManagement from '@/components/AdminDashboard/RestaurantManagement/RestaurantManagement';
-// import MenuView from '@/components/AdminDashboard/RestaurantManagement/MenuView/MenuView';
 
 export default {
-  components: { 
-    //   UserManagement 
-    // RestaurantManagement 
-    // MenuView
-},  
-name: 'ContentPanel',
-
+    name: 'ContentPanel',
+    methods:{ 
+        logout(){
+            this.$store.dispatch({
+                type: 'logout'
+            }).then(()=> {
+                this.cancelLogout();
+                this.$router.push({name: 'admin-login'})
+            })
+        },
+        cancelLogout(){
+            this.$store.dispatch({
+                type: 'confirmLogout',
+                confirmLogout: false
+            })
+        }
+    },
+    computed:{
+        showConfirm(){
+            return this.$store.state.authentication.confirmLogout;
+        }
+    }
 }
 </script>
 <style scoped>
 .content-panel{
-    /* background-color: #fff; */
-    /* margin: 0.8em; */
     flex-basis: 93%;
     min-height: 93vh
-    /* border-radius: 5px;  */
-    /* box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.1); */
 }
 </style>

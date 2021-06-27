@@ -34,9 +34,11 @@
                     </select>
                 </fieldset>
             </div>
-            <div class="form-group">
+            <div class="form-group avail">
                 <p>Availability</p>
-                <a class="day" v-for="n in 7" :class="{'day-active': form.availability[n-1]}" :key="n-1" @click.prevent="changeAvailability(n-1)">{{days[n-1]}}</a>
+                <div class="">
+                    <a class="day" v-for="n in 7" :class="{'day-active': form.availability[n-1]}" :key="n-1" @click.prevent="changeAvailability(n-1)">{{days[n-1]}}</a>
+                </div>
 
             </div>
             <div class="btn-panel">
@@ -111,27 +113,29 @@ export default {
 }
 .form-wrapper{
     background-color: #fff;
-    padding: 3em;
-    margin: 3em;
+    padding: 1.5em;
     border-radius: 10px;
+    font-size: .9em;
 }
 .form-group{
     padding: .5em 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: .9em;
 }
 .form-element-set{
     display: flex;
     justify-content: space-between;
 }
 .form-element{
-    font-size: 1.2em;
-    padding: .5em; 
+    font-size: .9em;
+    padding: .5em 0;
     border: 0;
     border-bottom: 1px solid #000;
     width: 100%;
 }
+
 .form-element:focus-visible{
     outline: 0;
 }
@@ -157,10 +161,7 @@ label{
     background-color: #673AB7;
 }
 
-.day:hover{
-    background-color: #673AB7;
-    cursor: pointer;
-}
+
 .btn-panel{
     margin: 1em 0 0;
     display: flex;
@@ -172,10 +173,36 @@ label{
     font-size: 2em;
     padding: 0 .5em;
 }
-.btn-icon:hover{
-    color: #673AB7
-}
+
 .btn-cancel:hover{
     color: crimson;
 }
+.avail{
+    display: flex;
+    flex-direction: column;
+}
+.avail p{
+    padding-bottom: .8em;
+}
+@media (min-width:900px){
+    .form-wrapper{
+        background-color: #fff;
+        padding: 3em;
+        margin: 3em;
+        border-radius: 10px;
+    }
+    .form-element{
+        
+        font-size: 1.2em;
+        padding: .5em;   
+    }
+    .btn-icon:hover{
+        color: #673AB7
+    }
+    .day:hover{
+        background-color: #673AB7;
+        cursor: pointer;
+    }
+}
+
 </style>

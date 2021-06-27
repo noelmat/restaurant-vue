@@ -6,7 +6,7 @@
         </div>
         <h2 class="heading heading-secondary" v-if="employeeUsers.length !== 0">Employees</h2>
         <div class="user-panel">
-            <UserCard v-for="user in employeeUsers"  :key="user.id" :user="user"/>
+            <UserCard v-for="user in employeeUsers"  :key="user.id" :user="user" @user-updated='fetchUsers'/>
         </div>
         <a class="link-unstyled btn add-btn" @click.prevent="createUser">
             <i class="fas fa-plus"></i>
@@ -19,6 +19,7 @@
 import {postUser, getUsers} from '@/services/admin/users';
 import UserCard from './UserCard/UserCard';
 import AddNewUser from './AddNewUser.vue';
+import store from '@/store';
 export default {
     name: 'UserManagement',
     components: {
@@ -31,10 +32,20 @@ export default {
            addUser: false,
         }
     },
+    beforeRouteEnter(to, from, next){
+        if(store.state.authentication.role === 'admin'){
+            next()
+        }else{
+            next({name: from.name})
+        }
+    },
     created(){
         getUsers()
             .then(users => {
                 this.users.push(...users);
+            })
+            .catch(err => {
+                this.$toast.error(`${err.message} while fetching users`)
             })
     },
     computed:{
@@ -53,7 +64,12 @@ export default {
         saveUser(event){
             postUser(event)
                 .then(()=> {
-                    console.log('User Registered')
+                    this.$toast.success(`User added successfully`);
+                    this.cancelAddUser();
+                    return this.fetchUsers()
+                })
+                .catch(err=>{
+                    this.$toast.error(`${err.message} while adding users`)
                 })
         },
         cancelAddUser(){
@@ -71,8 +87,15 @@ export default {
 }
 </script>
 <style scoped>
-.usermanagement{
-    margin:2em 3em 0 4.5em;
+.usermanagement {
+  margin: .5em 1em 0 2em;
+  /* font-size: .6em; */
+  min-height: 100vh;
+}
+@media (min-width: 900px) {
+  .usermanagement{
+      margin: 2em 3em 0 4.5em;
+  }
 }
 .user-panel{
     display: flex;

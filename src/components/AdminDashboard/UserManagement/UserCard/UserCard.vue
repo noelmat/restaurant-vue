@@ -8,7 +8,7 @@
                 <div class="name">
                     {{user.name}}
                 </div>
-                <img src="@/assets/user-icon.png" alt="" width="100%">
+                <img src="@/assets/user-icon.png" alt="" width="70%">
                 <div class="designation">
                     {{user.role}}
                 </div>
@@ -56,14 +56,14 @@ export default {
             console.log('Clicked');
         },
         saveChanges(event){
-            console.log(event)
             updateUserDetails(this.user._id, event)
             .then(()=>{
                 this.$emit('user-updated');
                 this.edit = false;
+                this.$toast.success('Changes Saved');
             })
-            .catch(()=>{
-                
+            .catch(err=>{
+                this.$toast.error(`${err.message} while saving changes`)
             })
         }
     }
@@ -72,10 +72,10 @@ export default {
 <style scoped>
 .card{
     position: relative;
-    padding: 1em 4em;
+    padding: 1em;
     flex-basis: 30%;
     max-width: 280px;
-    min-width: 250px;
+    min-width: 200px; 
     background-color: #fff;
     border-radius: 5px;
     margin-right: 3.33%;
@@ -88,12 +88,20 @@ export default {
     font-size: 0.9em;
     color: #673AB7;
 }
+
 .card-details{
     padding: 2.2em 0 1.2em;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+@media (min-width:900px) {
+    .card{
+        max-width: 280px;
+        min-width: 250px;
+    }
+}
+
 .user-details{
     text-align: center;
     margin-bottom: 2em;

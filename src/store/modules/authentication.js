@@ -10,7 +10,8 @@ const auth = {
         token: localStorage.getItem( KEY_TOKEN ) || '',
         username: localStorage.getItem( KEY_USERNAME ) || '',
         name: localStorage.getItem( KEY_NAME ) || '',
-        role: localStorage.getItem( KEY_ROLE ) || ''
+        role: localStorage.getItem( KEY_ROLE ) || '',
+        confirmLogout: false,
     },
     getters: {
         isAuthenticated( state ){
@@ -29,6 +30,9 @@ const auth = {
         },
         setRole(state, payload){
             state.role = payload.role;
+        },
+        setConfirmLogout(state, payload){
+            state.confirmLogout = payload.confirmLogout;
         }
     },
     actions: {
@@ -57,6 +61,12 @@ const auth = {
 
                         return username;
                     });
+        },
+        confirmLogout( context, payload){
+            context.commit({
+                type: 'setConfirmLogout',
+                confirmLogout: payload.confirmLogout
+            })
         },
         logout( context ){
             localStorage.removeItem(KEY_TOKEN);
