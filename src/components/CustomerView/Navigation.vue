@@ -5,7 +5,7 @@
         <ul class="nav container list-unstyled" :class="{'opacity-1': atTop, 'showMenuMobile': showMenuMobile}">
             <li><a href="#home" v-scroll-to="'#home'" class="link-unstyled nav-item">Home</a></li>
             <li><a href="#menu" v-scroll-to="'#menu'" class="link-unstyled nav-item">Menu</a></li>
-            <li><a href="" class="link-unstyled nav-item">Contact Us</a></li>
+            <li><a href="#menu" v-scroll-to="'#contact'" class="link-unstyled nav-item">Contact Us</a></li>
             <li><router-link :to="{name: 'customer-login'}" class="link-unstyled nav-item nav-cta">Login</router-link></li>
             <li><router-link :to="{name: 'cart'}" class="link-unstyled nav-item cart"><i class="fas fa-shopping-cart"></i><span class="cart-count">{{cartLength}}</span></router-link></li>
         </ul>
