@@ -92,7 +92,7 @@ export default {
 }
 
 .sidepanel-link{
-    /* text-align: center; */
+    text-align: center;
     padding: 1em 1.5em;
     color: #fff;
     font-weight: bold;
@@ -117,6 +117,8 @@ export default {
     }
     .sidepanel-link{
         padding: 1em 2em;
+        text-align: initial;
+
     }
 }
 
