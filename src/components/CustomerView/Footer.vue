@@ -1,7 +1,7 @@
 <template>
     <footer>
         <div class="footer">
-            <div class="contact" id="contact">
+            <!-- <div class="contact" id="contact">
                 <div class="heading">
                     <h2>Restaurant Details</h2>
                 </div>
@@ -24,7 +24,7 @@
                     </div>
                     
                 </div>
-            </div>
+            </div> -->
             <div class="footer-nav">
                 <span>Restaurant User? </span>
                 <router-link :to="{name: 'admin-login'}" class="link-unstyled nav-link btn">Login</router-link>

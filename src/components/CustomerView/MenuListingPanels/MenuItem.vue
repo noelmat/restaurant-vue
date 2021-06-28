@@ -11,9 +11,6 @@
 
             </div>
             <div class="menu-item-line ">
-                <div class="price">
-                    ₹ {{menuItem.price}}
-                </div>
                 <div class="spice-level">
                     <span>{{ menuItem.spiceLevel}}</span> 
                     <i class="fas fa-pepper-hot" v-for="n in 5" :class="{'active': n<=menuItem.spiceLevel}" :key="n"></i>
@@ -21,7 +18,9 @@
                 <div class="rating">
                     <span>{{ menuItem.rating}}</span>
                     <i class="fa-star" v-for="n in 5" :class="{'fas': n<=menuItem.rating, 'far': !n<menuItem.rating}" :key="n"></i>
-
+                </div>
+                <div class="price">
+                    ₹ {{menuItem.price}}
                 </div>
 
             </div>
@@ -78,7 +77,7 @@ export default {
 <style scoped>
 .menu-item{
     width: 100%;
-    border-radius: 10px;
+    border-radius: 3px;
     border: 0px solid #000;
     margin: .4em 0;
     display: flex;
@@ -142,7 +141,7 @@ export default {
 }
 .description{
     width: 100%;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .form-element{
     padding: .2em 0;
@@ -193,8 +192,8 @@ export default {
         justify-content: center;
         align-items: center;
         background-color:#fc8019 ;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
         color: #fff;
         font-weight: bold;
         margin: 0;
@@ -202,7 +201,7 @@ export default {
     }
     .add a{
         color: #fff;
-        border-radius: 10px;
+        border-radius: 5px;
         
     }
     .add:hover{

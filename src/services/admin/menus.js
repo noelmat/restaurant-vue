@@ -1,22 +1,22 @@
 import service from './configureAxios';
 
 export const getMenus = () => {
-    return service({requiresAuth: true}).get('http://localhost:3000/restaurant/menu',
+    return service({requiresAuth: true}).get('/restaurant/menu',
     )
 }
 
 export const getMenu = (id) => {
-    return service({requiresAuth: true}).get(`http://localhost:3000/restaurant/menu/${id}`,
+    return service({requiresAuth: true}).get(`/restaurant/menu/${id}`,
     )
 }
 
 export const addMenuItemToMenu = (id, menuItem) => {
-    return service({requiresAuth: true}).patch(`http://localhost:3000/restaurant/menu/${id}?action=add_menu_item`,
+    return service({requiresAuth: true}).patch(`/restaurant/menu/${id}?action=add_menu_item`,
     menuItem
     )
 }
 export const removeMenuItemFromMenu = (id, menuItem) => {
-    return service({requiresAuth: true}).patch(`http://localhost:3000/restaurant/menu/${id}?action=remove_menu_item`,
+    return service({requiresAuth: true}).patch(`/restaurant/menu/${id}?action=remove_menu_item`,
     {
         menuItem
     }
@@ -25,8 +25,8 @@ export const removeMenuItemFromMenu = (id, menuItem) => {
 
 
 export const updateMenu = (id, menu) => {
-    return service({requiresAuth: true}).patch(`http://localhost:3000/restaurant/menu/${id}`,
-    menu
+    return service({requiresAuth: true}).patch(`/restaurant/menu/${id}`,
+         menu
     )
 
 }

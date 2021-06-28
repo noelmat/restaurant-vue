@@ -33,6 +33,9 @@ const cart = {
         },
         setCart(state, payload){
             state.cart = payload.cart;
+        },
+        resetCartItem(state, payload){
+            state.cartItem = payload.cartItem;
         }
     },
     actions: {
@@ -42,6 +45,12 @@ const cart = {
                     return getCart()
                 })
                 .then(cart => {
+                    context.commit({
+                        type: 'resetCartItem',
+                        cartItem: {}
+                    })
+                    
+
                     cart.items.forEach(item => {
                         context.commit({
                             type: 'setCartItem',
