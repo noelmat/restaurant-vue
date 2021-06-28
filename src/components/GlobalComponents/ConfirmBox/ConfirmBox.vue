@@ -4,10 +4,10 @@
             {{ message }}
         </div>
         <div class="btn-panel">
-            <a href="" class="btn link-unstyled btn-confirm" @click.prevent="confirm">
+            <a href="" id="confirm" class="btn link-unstyled btn-confirm" @click.prevent="confirm">
                 {{buttonText}}
             </a>
-            <a href="" class="btn link-unstyled btn-cancel" @click.prevent='cancel' title="Cancel">
+            <a href="" id="cancel" class="btn link-unstyled btn-cancel" @click.prevent='cancel' title="Cancel">
                 Cancel
             </a>
         </div>

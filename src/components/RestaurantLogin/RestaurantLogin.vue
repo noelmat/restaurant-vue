@@ -6,19 +6,19 @@
             </h1>
             <form class="form" novalidate>
                 <div class="form-group">
-                    <input type="text" class="form-element" placeholder="Username" :class="{'error': $v.form.username.$error}"  v-model="form.username" @blur="$v.form.username.$touch()" @keyup.enter="login">
+                    <input type="text" id="username" class="form-element" placeholder="Username" :class="{'error': $v.form.username.$error}"  v-model="form.username" @blur="$v.form.username.$touch()" @keyup.enter="login">
                     <div class="validation" v-if="$v.form.username.$error">
                         Field required
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-element" :class="{'error': $v.form.password.$error}" placeholder="Password" v-model="form.password" @blur="$v.form.password.$touch" @keyup.enter="login">
+                    <input type="password" id="password" class="form-element" :class="{'error': $v.form.password.$error}" placeholder="Password" v-model="form.password" @blur="$v.form.password.$touch" @keyup.enter="login">
                     <div class="validation" v-if="$v.form.password.$error">
                         Field required
                     </div>
                 </div>
                 <div class="form-group">
-                    <a href="" class="link-unstyled btn btn-login" @click.prevent="login"> Login </a>
+                    <a href="" id="submit" class="link-unstyled btn btn-login" @click.prevent="login"> Login </a>
                 </div>
             </form>
         </div>

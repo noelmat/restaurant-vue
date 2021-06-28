@@ -4,7 +4,7 @@
             <div class="greeting">
                 {{name}}
             </div>
-            <a href="" class="logout" @click.prevent="confirmLogout"><i class="fas fa-sign-out-alt"></i><span>logout</span></a>
+            <a href="" id="logout" class="logout" @click.prevent="confirmLogout"><i class="fas fa-sign-out-alt"></i><span>logout</span></a>
         </div>
         <router-link :to="{name: 'dashboard-home'}" class="link-unstyled sidepanel-link" active-class="active" exact>
             <i class="fas fa-home"></i><span>Home</span>
@@ -23,11 +23,6 @@
 <script>
 export default {
     name: 'SidePanel',
-    data(){
-        return{
-            showConfirm: false,
-        }
-    },
     methods: {
         confirmLogout(){
             this.$store.dispatch({
@@ -40,9 +35,6 @@ export default {
     computed:{
         name(){
             return this.$store.state.authentication.name;
-        },
-        role(){
-            return this.$store.state.authentication.role;
         }
     }
 }
@@ -62,7 +54,6 @@ export default {
 
 .user-details{
     display: flex;
-    /* visibility: hidden; */
     width: 100%;
     flex-direction: column;
     align-items: center;
