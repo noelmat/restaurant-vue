@@ -9,7 +9,7 @@
         @delete-menu="deleteMenuClicked"
       />
       <div class="empty-list" v-if="Object.keys(menus).length === 0">
-          No Menus Found. Get started by add a new Menu
+        No Menus Found. Get started by adding a new Menu
       </div>
     </div>
     <ModalComponent v-if="addNewMenu"
@@ -32,7 +32,7 @@
 import { getMenus, postMenu, deleteMenu } from "@/services/admin/menus.js";
 import MenuCard from "./MenuCard";
 import AddEditMenu from "./MenuView/AddEditMenu.vue";
-import store from '@/store';
+import store from "@/store";
 
 export default {
   name: "MenuManagement",
@@ -49,18 +49,19 @@ export default {
     };
   },
   created() {
-    getMenus().then((menus) => {
-      menus.forEach((menu) => {
-        this.$set(this.menus, menu._id, menu);
-      });
-    }).catch(err => this.$toast.error(`${err.message} while loading menus`))
-    ;
+    getMenus()
+      .then((menus) => {
+        menus.forEach((menu) => {
+          this.$set(this.menus, menu._id, menu);
+        });
+      })
+      .catch((err) => this.$toast.error(`${err.message} while loading menus`));
   },
-  beforeRouteEnter(to, from, next){
-    if(store.state.authentication.role === 'admin'){
+  beforeRouteEnter(to, from, next) {
+    if (store.state.authentication.role === "admin") {
       next();
-    }else{
-      next({name: from.name})
+    } else {
+      next({ name: from.name });
     }
   },
   methods: {
@@ -72,14 +73,9 @@ export default {
     },
     saveMenu(event) {
       postMenu(event)
-        .then(() => {
-            this.cancelAdd();
-            return getMenus();
-        })
-        .then((menus) => {
-          menus.forEach((menu) => {
-            this.$set(this.menus, menu._id, menu);
-          });
+        .then((menu) => {
+          this.$set(this.menus, menu._id, menu);
+          this.cancelAdd();
           this.$toast.success(`${event.name} Menu Added`);
         })
         .catch((err) => {
@@ -92,20 +88,15 @@ export default {
     },
     cancelDelete() {
       this.showDeleteConfirm = false;
+      this.menuToDelete = {};
     },
     confirmDelete() {
       deleteMenu(this.menuToDelete._id)
         .then(() => {
-            this.showDeleteConfirm =false;
-            this.$toast.success(`${this.menuToDelete.name} deleted`)
-          return getMenus();
-        })
-        .then((menus) => {
-            this.menus = {}
-          menus.forEach((menu) => {
-            this.$set(this.menus, menu._id, menu);
-            
-          });
+          this.showDeleteConfirm = false;
+          this.$toast.success(`${this.menuToDelete.name} deleted`);
+          this.$delete(this.menus, this.menuToDelete._id);
+          this.menuToDelete = {};
         })
         .catch((err) => {
           this.$toast.error(`${err.message} while adding Menu`);
@@ -116,13 +107,13 @@ export default {
 </script>
 <style scoped>
 .restaurant-management {
-  margin: .5em 1em 0 2em;
+  margin: 0.5em 1em 0 2em;
   /* font-size: .6em; */
   min-height: 100vh;
 }
 @media (min-width: 900px) {
-  .restaurant-management{
-      margin: 2em 3em 0 4.5em;
+  .restaurant-management {
+    margin: 2em 3em 0 4.5em;
   }
 }
 .heading {
@@ -149,11 +140,11 @@ export default {
 .add-btn:active {
   color: #000;
 }
-.empty-list{
-    border: 1px solid #673AB7;
-    padding: 1em;
-    width: 100%;
-    border-radius: 10px;
-    color: #673AB7;
+.empty-list {
+  border: 1px solid #673ab7;
+  padding: 1em;
+  width: 100%;
+  border-radius: 10px;
+  color: #673ab7;
 }
 </style>
