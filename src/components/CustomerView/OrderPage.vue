@@ -72,9 +72,9 @@ export default {
             .then(()=>{
                 this.$router.push({name: 'home'});
                 this.$toast.success('Order has been placed Successfully');
-                this.$store.dispatch({
-                    type: "loadSession"
-                })
+                return this.$store.dispatch({
+                            type: "loadSession"
+                        })
             })
             .catch(error =>{
                 this.$toast.error(`${error.message}`);
