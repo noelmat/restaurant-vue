@@ -8,6 +8,7 @@ import UserManagement from '@/components/AdminDashboard/UserManagement/UserManag
 import MenuView from '@/components/AdminDashboard/RestaurantManagement/MenuView/MenuView';
 import RestaurantLogin from '@/components/RestaurantLogin/RestaurantLogin';
 import CustomerLogin from '@/components/CustomerLogin/CustomerLogin';
+import CustomerRegistration from '@/components/CustomerLogin/CustomerRegistration';
 import HomePage from '@/components/CustomerView/HomePage';
 import Cart from '@/components/CustomerView/Cart';
 import CustomerDashboard from '@/components/CustomerDashboard/CustomerDashboard';
@@ -24,6 +25,7 @@ Vue.component('UserManagement', UserManagement);
 Vue.component('MenuView', MenuView);
 Vue.component('RestaurantLogin', RestaurantLogin);
 Vue.component('CustomerLogin', CustomerLogin);
+Vue.component('CustomerRegistration', CustomerRegistration);
 Vue.component('HomePage', HomePage);
 Vue.component('Cart', Cart);
 Vue.component('CustomerDashboard', CustomerDashboard);
@@ -53,6 +55,12 @@ const router = new Router({
                     meta: adminMeta,
                 },
                 {
+                    name: 'dashboard-orders',
+                    path: 'orders',
+                    meta: adminMeta,
+                    component: OrderManagement,
+                },
+                {
                     name: 'dashboard-users',
                     path: 'users',
                     meta: adminMeta,
@@ -70,12 +78,7 @@ const router = new Router({
                     meta: adminMeta,
                     component: MenuView
                 },
-                {
-                    name: 'dashboard-orders',
-                    path: 'orders',
-                    meta: adminMeta,
-                    component: OrderManagement,
-                }
+               
             ]
         },
         {
@@ -89,6 +92,11 @@ const router = new Router({
             component: CustomerLogin
         },
         {
+            name: 'customer-registration',
+            path: '/register',
+            component: CustomerRegistration
+        },
+        {
             name: 'home',
             path: '/',
             component: HomePage
@@ -97,6 +105,11 @@ const router = new Router({
             name: 'customer-login-checkout',
             path: '/login/:cart',
             component: CustomerLogin
+        },
+        {
+            name: 'customer-registration-checkout',
+            path: '/register/:cart',
+            component: CustomerRegistration
         },
         {
             name: 'cart',

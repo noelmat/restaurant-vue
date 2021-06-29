@@ -15,6 +15,8 @@ export default {
             }).then(()=> {
                 this.cancelLogout();
                 this.$router.push({name: 'admin-login'})
+            }).catch(err=>{
+                this.$toast.error(`${err.message} while logging out`)
             })
         },
         cancelLogout(){
@@ -34,6 +36,7 @@ export default {
 <style scoped>
 .content-panel{
     flex-basis: 93%;
-    min-height: 93vh
+    min-height: 93vh;
+    background-color: #F1F0F0;
 }
 </style>

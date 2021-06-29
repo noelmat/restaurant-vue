@@ -1,19 +1,29 @@
+import Vue from 'vue';
+
 const orders = {
     state: {
         listener : {},
         orders: {}
+    },
+    getters:{
+        orders(state){
+            return state.orders;
+        }
     },
     mutations: {
         setListener(state, payload){
             state.listener = payload.listener
         },
         setOrder(state, payload){
-            state.orders[payload.order._id] = payload.order;
+            if(payload.order.status !== 'completed'){
+                return Vue.set(state.orders,payload.order._id,payload.order)
+            }
+            Vue.delete(state.orders,payload.order._id)
         },
         setOrders(state, payload){
             payload.order.forEach(order => {
-                state.orders[order._id] = order;
-            })
+                Vue.set(state.orders,order._id,order)
+            });
             
         }
     },

@@ -76,15 +76,8 @@ const auth = {
             context.commit( 'setToken' , '' );
             context.commit( 'setUsername' , '');
             context.commit( 'setName' , '' );
-            context.commit( 'setRole' , '');
-            context.dispatch({
-                type: "stop_tracking"
-            }).then(()=>{
-                return Promise.resolve();
-            }).catch(error=>{
-                return Promise.reject(error)
-            })
-            
+            context.commit( 'setRole' , '');  
+            return Promise.resolve();          
         }
     }
 }

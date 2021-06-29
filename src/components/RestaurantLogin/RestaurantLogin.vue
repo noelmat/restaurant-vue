@@ -27,7 +27,6 @@
 </template>
 <script>
 import { required } from 'vuelidate/lib/validators';
-import {activeOrders} from '@/services/eventSource/activeOrders';
 
 export default {
     name: 'RestaurantLogin',
@@ -58,9 +57,9 @@ export default {
                         credentials: this.form
                     })
                     .then(()=>{
-                        this.$router.push({name: 'dashboard-orders'});
+                        this.$router.push({name: 'dashboard-home'});
                         this.$toast.success('Logged in as Admin');
-                        activeOrders();
+                        
                     })
                     .catch(err=> {
                         this.$toast.error(`${err.message} occured`);
@@ -85,7 +84,7 @@ export default {
 .wrapper {
     padding: 2em;
     box-shadow: 0 1px 4px 1px rgba(0,0,0,0.2);
-    border-radius: 10px;
+    border-radius: 3px;
     background-color:#fff;
     display: flex;
     flex-direction: column;
@@ -113,13 +112,15 @@ export default {
 }
 .form-element{
     padding: .8em;
-    border-radius: 10px;
+    border-radius: 3px;
     border: 0;
     font-size: 1.1em;
     border: 1px solid #333;
 }
 .form-element:focus-visible{
     outline: 0;
+    border: 0;
+    outline: solid 1px #fc8019 ;
 }
 .error{
     border: 1px solid #f79483;
@@ -127,7 +128,7 @@ export default {
 }
 .btn-login{
     color: #fff;
-    background: green;
+    background: #fc8019;
     text-align: center;
 }
 </style>

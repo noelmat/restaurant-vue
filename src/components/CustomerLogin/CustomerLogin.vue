@@ -7,19 +7,32 @@
         </h1>
         <form class="form">
             <div class="form-group">
-                <input type="text" class="form-element" placeholder="Email" v-model="form.email">
+                <input type="text" id="email" class="form-element" placeholder="Email" v-model="form.email" :class="{'error': $v.form.email.$error}" @blur="$v.form.email.$touch()" @keyup.enter="login">
+                <div class="validation" v-if="$v.form.email.$error">
+                    Field required
+                </div>
+
             </div>
             <div class="form-group">
-                <input type="password" class="form-element" placeholder="Password" v-model="form.password">
+                <input type="password" class="form-element" placeholder="Password" :class="{'error': $v.form.password.$error}" v-model="form.password" @blur="$v.form.password.$touch()" @keyup.enter="login">
+                <div class="validation" v-if="$v.form.password.$error">
+                    Field required
+                </div>
+
             </div>
             <div class="form-group">
-                <a href="" class="link-unstyled btn btn-login" @click.prevent="login"> Login </a>
+                <a href="" id="submit" class="link-unstyled btn btn-login" :class="{'disabled': loading}" @click.prevent="login"> {{loading?"Logging In":"Login"}} </a>
+            </div>
+            <div class="register">
+                New User? <a href="" @click.prevent="register" >Register</a>
             </div>
         </form>
     </div>
     </div>
 </template>
 <script>
+import { required } from 'vuelidate/lib/validators';
+
 export default {
     name: 'CustomerLogin',
     data(){
@@ -28,9 +41,21 @@ export default {
                 email: '',
                 password: ''
             },
-            isCheckout: false
+            isCheckout: false,
+            loading: false
         }
     },  
+    validations: {
+        form: {
+            email: {
+                required,
+            },
+            password: {
+                required
+            }
+        }
+    },
+
     created(){
         if(this.$route.query !== undefined && this.$route.query.checkout){
             this.isCheckout = true;
@@ -38,22 +63,38 @@ export default {
     },
 
     methods:{
+        register(){
+            if(this.isCheckout){
+                this.$router.push({name: 'customer-registration', params: {...this.$route.params}, query: {...this.$route.query}});
+            }else{
+                this.$router.push({name: 'customer-registration'})
+            }
+        },
         login(){
-            this.$store.dispatch({
-                type: 'customerLogin',
-                credentials: this.form
-            })
-            .then(()=>{
-                if(this.isCheckout){
-                    this.$router.push({name: 'order', params: {...this.$route.params}});
-                }else{
-                    this.$router.push({name: 'customer-home'})
-                }
-                this.$toast.success(`Logged in successfully`)
-            })
-            .catch(err=> {
-                this.$toast.error(`${err.message}`);
-            })
+            this.$v.form.$touch()
+
+            if(!this.$v.form.$invalid && !this.loading){
+                this.loading = true;
+                this.$store.dispatch({
+                    type: 'customerLogin',
+                    credentials: this.form
+                })
+                .then(()=>{
+                    this.loading = false;
+                    if(this.isCheckout){
+                        this.$router.push({name: 'order', params: {...this.$route.params}});
+                    }else{
+                        this.$router.push({name: 'customer-home'})
+                    }
+                    this.$toast.success(`Logged in successfully`)
+                })
+                .catch(err=> {
+                    this.loading = false;
+                    this.$toast.error(`${err.message}`);
+                })
+            }else{
+                this.$toast.error("Please fill the fields correctly")
+            }
         }
     }
 }
@@ -101,6 +142,8 @@ export default {
 }
 .form-element:focus-visible{
     outline: 0;
+    border: 0;
+    outline: solid 1px #fc8019 ;
 }
 
 .validation{
@@ -114,8 +157,14 @@ export default {
 }
 .btn-login{
     color: #fff;
-    background: green;
+    background-color: #fc8019;
     text-align: center;
 }
+.register{
+    text-align: right;
 
+}
+.disabled{
+    background-color: #aaa;
+}
 </style>
