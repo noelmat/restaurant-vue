@@ -28,8 +28,8 @@
                 {{ menuItem.description }}
             </div>
         </div>
-        <a class="add link-unstyled" :class="{'show-on-desktop': hovered}" @click.prevent="addToCart">
-            <a class="link-unstyled">Add</a>
+        <a class="add link-unstyled" :class="{'show-on-desktop': hovered, 'disabled': addInProgress}" @click.prevent="addToCart">
+            <a class="link-unstyled" :class="{'disabled': addInProgress}">Add</a>
         </a>
     </div>
     
@@ -50,6 +50,7 @@ export default {
         return {
             showFull : false,
             hovered: false,
+            addInProgress: false,
         }
     },
     methods:{
@@ -60,16 +61,22 @@ export default {
             this.hovered = !this.hovered;
         },
         addToCart(){
-            const item = {}
-            item.item = this.menuItem._id;
-            item.quantity = 1;
-            this.$store.dispatch({
-                type: 'addToCart',
-                item
-            }).then(()=>{
-                this.$toast.success(`${this.menuItem.name} Added`)
-            })
-
+            if(!this.addInProgress){
+                const item = {}
+                item.item = this.menuItem._id;
+                item.quantity = 1;
+                this.addInProgress = true;
+                this.$store.dispatch({
+                    type: 'addToCart',
+                    item
+                }).then(()=>{
+                    this.addInProgress = false;
+                    this.$toast.success(`${this.menuItem.name} Added`)
+                }).catch(error => {
+                    this.addInProgress = false;
+                    this.$toast.error(`${error.message}`)
+                })
+            }
         }
     }
 }
@@ -173,6 +180,9 @@ export default {
     color: #fff;
 }
 
+.disabled{
+    background-color: #888 !important;   
+}
 @media (min-width: 600px) {
     .spice-level span{
         display: none;
@@ -216,10 +226,6 @@ export default {
     .show-on-desktop{
         display: flex;
     }
-}
-@media (max-width: 900px){
-  
-    
 }
 
 
