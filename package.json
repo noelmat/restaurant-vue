@@ -5,14 +5,18 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "rimraf": "rimraf ../server/public",
+    "copyfiles":"copyfiles -u 1 \"./dist/**/*\" ../server/public",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "axios": "^0.21.1",
+    "copyfiles": "^2.4.1",
     "core-js": "^3.6.5",
     "normalize.css": "^8.0.1",
+    "rimraf": "^3.0.2",
     "vue": "^2.6.11",
     "vue-router": "^3.5.2",
     "vue-scrollto": "^2.20.0",
