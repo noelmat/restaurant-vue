@@ -1,28 +1,28 @@
-import axios from 'axios';
+import service from './configureAxios';
 
 
 export const getCart = ()=>{
-    return axios.get(
-        `http://localhost:3000/cart/`,
+    return service().get(
+        `/cart/`,
         {
             withCredentials: true
         }
-    ).then(res => res.data);
+    );
 }
 export const addToCart = (cartId,item)=>{
-    return axios.patch(
-        `http://localhost:3000/cart/${cartId}?action=add_to_cart`,
+    return service().patch(
+        `/cart/${cartId}?action=add_to_cart`,
         {
             ...item
         }
-    ).then(res => res.data);
+    );
 }
 export const removeFromCart = (cartId,item)=>{
-    return axios.patch(
-        `http://localhost:3000/cart/${cartId}?action=remove_from_cart`,
+    return service().patch(
+        `/cart/${cartId}?action=remove_from_cart`,
         {
             ...item
         },
 
-    ).then(res => res.data);
+    );
 }

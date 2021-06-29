@@ -1,9 +1,8 @@
-import axios from 'axios';
+import service from './configureAxios';
 
 export const getSession = () => {
-    return axios.get(
-        "http://localhost:3000/auth/customer/session",
+    return service().get(
+        "/auth/customer/session",
         {withCredentials:true}
-    )
-    .then(res => res.data);
+    );
 }

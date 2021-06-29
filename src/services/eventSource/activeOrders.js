@@ -1,8 +1,8 @@
 import store from '@/store';
 
 export const activeOrders = ()=>{
-    let url = process.env.$BASE_URL || 'http://localhost:3000/';
-    url += 'oms/active';
+    let url = process.env.VUE_APP_API_BASE_URL || 'http://localhost:3000/';
+    url += '/oms/active';
     const sse = new EventSource(url);
     sse.onmessage = (event)=>{
         const parsed = JSON.parse(event.data);

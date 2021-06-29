@@ -3,7 +3,7 @@ import store from '../../store';
 
 export default ({requiresAuth = false} = {}) => {
     const options = {};
-    options.baseURL = 'http://localhost:3000';
+    options.baseURL = process.env.VUE_APP_API_BASE_URL;
     options.headers = {};
     if(requiresAuth){
         if(store.state.customerAuth !== undefined)
