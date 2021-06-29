@@ -15,6 +15,7 @@ import Footer from './Footer.vue';
 
 export default {
     name: "HomePage",
+    title: 'Restaurant Home',
     components: {
         Header,
         Navigation,

@@ -104,6 +104,7 @@ import { required, sameAs, minLength } from 'vuelidate/lib/validators';
 import { register } from '@/services/customer/auth';
 export default {
     name: 'CustomerRegistration',
+    title: 'Customer Registration',
     data(){
         return {
             form: {

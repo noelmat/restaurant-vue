@@ -10,6 +10,7 @@ import SidePanel from './SidePanel/SidePanel';
 
 export default {
     name: 'CustomerDashboard',
+    title: 'Customer Dashboard',
     components: {
         MainPanel,
         SidePanel

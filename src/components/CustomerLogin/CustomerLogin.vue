@@ -35,6 +35,7 @@ import { required } from 'vuelidate/lib/validators';
 
 export default {
     name: 'CustomerLogin',
+    title: 'Customer Login',
     data(){
         return {
             form: {

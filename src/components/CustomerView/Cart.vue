@@ -25,6 +25,7 @@ export default {
     components: {
         CartItem
     },
+    title: 'Cart',
     created(){
         if(this.$store.getters.cart.items === undefined){
             this.$store.dispatch({

@@ -41,6 +41,7 @@ export default {
         AddMenuItem,
         AddEditMenu
     },
+    title: "Menu View",
     data(){
         return{
             menu : {},

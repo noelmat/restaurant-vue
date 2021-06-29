@@ -12,6 +12,7 @@ import {activeOrders} from '@/services/eventSource/activeOrders';
 import OrderCard from './OrderCard.vue';
 export default {
     name: "OrderManagement",
+    title: 'Order Management | Dashboard',
     components: {
         OrderCard
     },

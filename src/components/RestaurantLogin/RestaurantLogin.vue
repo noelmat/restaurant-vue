@@ -30,6 +30,7 @@ import { required } from 'vuelidate/lib/validators';
 
 export default {
     name: 'RestaurantLogin',
+    title: "Restaurant User Login",
     data(){
         return {
             form: {

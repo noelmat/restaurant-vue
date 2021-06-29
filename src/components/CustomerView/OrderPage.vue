@@ -34,6 +34,7 @@ export default {
         OrderItem,
         AddressCard
     },
+    title: 'Order Summary',
     data(){
         return {
             selectedAddress: '',

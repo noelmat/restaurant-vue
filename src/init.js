@@ -5,6 +5,8 @@ import VueScrollTo from 'vue-scrollto'
 import Toast, {POSITION} from 'vue-toastification';
 import Vuelidate from 'vuelidate';
 
+import titleMixin from './mixins/title-mixin';
+
 Vue.use(Router);
 Vue.use(Vuex);
 Vue.use(VueScrollTo);
@@ -13,6 +15,7 @@ Vue.use(Toast, {
     timeout: 2000
 });
 Vue.use(Vuelidate);
+Vue.mixin(titleMixin)
 
 import "normalize.css/normalize.css";
 import "@fortawesome/fontawesome-free/css/all.css";

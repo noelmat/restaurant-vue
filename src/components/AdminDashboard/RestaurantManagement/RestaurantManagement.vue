@@ -36,7 +36,8 @@ import AddEditMenu from "./MenuView/AddEditMenu.vue";
 import store from "@/store";
 
 export default {
-    name: "MenuManagement",
+    name: "RestaurantManagement",
+    title: 'Menu Management',
     components: {
         MenuCard,
         AddEditMenu,
