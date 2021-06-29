@@ -8,7 +8,10 @@
                 :menu="menus[menuId]"
                 @delete-menu="deleteMenuClicked"
             />
-            <div class="empty-list" v-if="Object.keys(menus).length === 0">
+            <div class="message loading-message" v-if="loading">
+                Loading Menus ...
+            </div>
+            <div class="message empty-message" v-if="Object.keys(menus).length === 0 && !loading">
                 No Menus Found. Get started by adding a new Menu
             </div>
         </div>
@@ -48,16 +51,22 @@ export default {
             addNewMenu: false,
             menuToDelete: {},
             showDeleteConfirm: false,
+            loading: false
         };
     },
     created() {
+        this.loading = true;
         getMenus()
         .then((menus) => {
             menus.forEach((menu) => {
-            this.$set(this.menus, menu._id, menu);
+                this.$set(this.menus, menu._id, menu);
             });
+            this.loading = false;
         })
-        .catch((err) => this.$toast.error(`${err.message} while loading menus`));
+        .catch((err) => {
+            this.loading = false;
+            this.$toast.error(`${err.message} while loading menus`)
+        });
     },
     beforeRouteEnter(to, from, next) {
         if (store.state.authentication.role === "admin") {
@@ -141,11 +150,17 @@ export default {
 .add-btn:active {
     color: #000;
 }
-.empty-list {
-    border: 1px solid #673ab7;
+.message{
     padding: 1em;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 3px;
+}
+.empty-message {
+    border: 1px solid #673ab7;
+    color: #673ab7;
+}
+.loading-message{
+    border: 1px solid #673ab7;
     color: #673ab7;
 }
 </style>
