@@ -22,8 +22,8 @@
 
             </div>
             <div class="btn-panel">
-                <a href="" class="link-unstyled" title="Edit item" @click.prevent="edit"><i class="fas fa-edit"></i></a>
-                <a href="" class="link-unstyled" title="Delete item" @click.prevent="requestDelete"><i class="fas fa-times-circle"></i></a>
+                <a href="" id="edit" class="link-unstyled" title="Edit item" @click.prevent="edit"><i class="fas fa-edit"></i></a>
+                <a href="" id="delete" class="link-unstyled" title="Delete item" @click.prevent="requestDelete"><i class="fas fa-times-circle"></i></a>
             </div>
 
         </div>
@@ -76,12 +76,10 @@ export default {
             deleteMenuItem(this.item._id)
             .then(menuItem => {
                 this.$emit('delete-item', menuItem._id);
-                this.$toast.success(`${menuItem.name} deleted`, {
-                    timeout: 2000
-                })
+                this.$toast.success(`${menuItem.name} deleted`)
             })
             .catch(err =>{
-                console.log(err)
+                this.$toast.error(`${err.message}`);
             })
         }
     }
@@ -91,7 +89,7 @@ export default {
 .menu-item{
     width: 90%;
     border-radius: 5px;
-    border: 1px solid #000;
+    border: 1px solid rgba(0,0,0,0.2);
     margin: .4em 0;
     display: flex;
     flex-direction: column;
@@ -142,11 +140,13 @@ export default {
     padding: .2em 0;
 }
 .special{
-    background-color: #673AB7;
+    background-color: #fc8019;
     padding: .2em 1em;
     color: #fff;
 }
-
+#delete{
+    margin-left: 5px;
+}
 @media (min-width: 900px) {
     .spice-level span{
         display: none;

@@ -3,26 +3,41 @@ import store from '@/store';
 
 import AdminDashboard from '@/components/AdminDashboard/AdminDashboard';
 import RestaurantManagement from '@/components/AdminDashboard/RestaurantManagement/RestaurantManagement';
+import OrderManagement from '@/components/AdminDashboard/OrderManagement/OrderManagement';
 import UserManagement from '@/components/AdminDashboard/UserManagement/UserManagement';
 import MenuView from '@/components/AdminDashboard/RestaurantManagement/MenuView/MenuView';
 import RestaurantLogin from '@/components/RestaurantLogin/RestaurantLogin';
 import CustomerLogin from '@/components/CustomerLogin/CustomerLogin';
+import CustomerRegistration from '@/components/CustomerLogin/CustomerRegistration';
 import HomePage from '@/components/CustomerView/HomePage';
 import Cart from '@/components/CustomerView/Cart';
+import CustomerDashboard from '@/components/CustomerDashboard/CustomerDashboard';
+import CustomerHome from '@/components/CustomerDashboard/CustomerHome/CustomerHome';
+import CustomerOrders from '@/components/CustomerDashboard/CustomerOrders/CustomerOrders';
+import OrderPage from '@/components/CustomerView/OrderPage';
 
 import Vue from 'vue';
 
 Vue.component('AdminDashboard', AdminDashboard);
 Vue.component('RestaurantManagement', RestaurantManagement);
+Vue.component('OrderManagement', OrderManagement);
 Vue.component('UserManagement', UserManagement);
 Vue.component('MenuView', MenuView);
 Vue.component('RestaurantLogin', RestaurantLogin);
 Vue.component('CustomerLogin', CustomerLogin);
+Vue.component('CustomerRegistration', CustomerRegistration);
 Vue.component('HomePage', HomePage);
 Vue.component('Cart', Cart);
+Vue.component('CustomerDashboard', CustomerDashboard);
+Vue.component('CustomerHome', CustomerHome);
+Vue.component('CustomerOrders', CustomerOrders);
+Vue.component('OrderPage', OrderPage);
 
-const meta = {
-    authorize : []
+const adminMeta = {
+    requiresAdminAuth : true, requiresCustAuth : false
+};
+const custMeta = {
+    requiresAdminAuth : false, requiresCustAuth : true
 };
 
 const router = new Router({
@@ -32,34 +47,39 @@ const router = new Router({
             name: 'admin',
             path: '/admin/dashboard',
             component: AdminDashboard,
-            meta,
+            meta: adminMeta,
             children: [
                 {
                     name: 'dashboard-home',
                     path:'',
-                    meta
+                    meta: adminMeta,
+                },
+                {
+                    name: 'dashboard-orders',
+                    path: 'orders',
+                    meta: adminMeta,
+                    component: OrderManagement,
                 },
                 {
                     name: 'dashboard-users',
                     path: 'users',
-                    meta,
+                    meta: adminMeta,
                     component: UserManagement
                 },
                 {
                     name: 'dashboard-menus',
                     path: 'menus',
-                    meta,
+                    meta: adminMeta,
                     component: RestaurantManagement,
                 },
                 {
                     name: 'dashboard-menu-detail',
                     path: 'menus/:menuId',
-                    meta,
+                    meta: adminMeta,
                     component: MenuView
-                }
+                },
+               
             ]
-			
-
         },
         {
             name: 'admin-login',
@@ -72,30 +92,93 @@ const router = new Router({
             component: CustomerLogin
         },
         {
+            name: 'customer-registration',
+            path: '/register',
+            component: CustomerRegistration
+        },
+        {
             name: 'home',
             path: '/',
             component: HomePage
         },
         {
+            name: 'customer-login-checkout',
+            path: '/login/:cart',
+            component: CustomerLogin
+        },
+        {
+            name: 'customer-registration-checkout',
+            path: '/register/:cart',
+            component: CustomerRegistration
+        },
+        {
             name: 'cart',
             path: '/cart',
             component: Cart
+        },
+        {
+            name: 'order',
+            path: '/order/:cart',
+            component: OrderPage,
+            meta: custMeta
+        },
+        {
+            name: 'customer-dashboard',
+            path: '/customer/dashboard',
+            meta: custMeta,
+            component: CustomerDashboard,
+            children: [
+                {
+                    name: 'customer-home',
+                    path: '',
+                    meta: custMeta,
+                    component: CustomerHome
+                },
+                {
+                    name: 'customer-orders',
+                    path: 'orders',
+                    meta: custMeta,
+                    component: CustomerOrders
+                }
+            ]
         }
     ]
 })
 router.beforeEach((to, from, next) =>{
-    if(to.meta.authorize && !store.getters.isAuthenticated){
+    if(to.meta.requiresAdminAuth && !store.getters.isAuthenticated){
         next({
             name: 'admin-login',
         });
-    }else{
-        // if(['login', 'register'].indexOf(to.name) !== -1 && store.getters.isAuthenticated){
-        //     next({ name: 'dashboard-home'})
-        // }
-        // else{
-            next()
-        // }
+    }else if(to.meta.requiresCustAuth && !store.getters.isCustomerLoggedIn){
+        if(to.name === 'order'){
+            next({
+                name: 'customer-login-checkout',
+                params: {
+                    ...to.params,
+                },
+                query: {
+                    checkout: true
+                }
+            })
+    
+        }else{
+            next({
+                name: 'customer-login',
+                params: to.params
+            })
+        }
         
+    }
+    else{
+        if(to.name === 'customer-login' && store.getters.isCustomerLoggedIn){
+            next({name: 'customer-home', params: to.params, query: to.query})
+        }
+        else if(to.name === 'admin-login' && store.getters.isAuthenticated){
+            next({name: 'admin', params: to.params, query: to.query})
+        }else{
+            next()
+        }
+            
     }
 })
 

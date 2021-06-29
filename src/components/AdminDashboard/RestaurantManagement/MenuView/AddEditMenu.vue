@@ -47,7 +47,7 @@
             </div>
             <div class="btn-panel">
                 <a href="" class="link-unstyled btn-icon" @click.prevent='save' title="Save Menu">
-                    <i class="far fa-check-circle"></i>
+                    <i class="fas fa-check-circle"></i>
                 </a>
                 <a href="" class="link-unstyled btn-icon btn-cancel" @click.prevent='cancel' title="Cancel">
                     <i class="far fa-times-circle"></i>
@@ -155,14 +155,14 @@ export default {
 <style scoped>
 .heading{
     margin: 0;
-    margin-bottom: 1em;
+    margin-bottom: .5em;
     text-align: center;
 
 }
 .form-wrapper{
     background-color: #fff;
-    padding: 2em;
-    border-radius: 10px;
+    padding: 1em;
+    border-radius: 3px;
     font-size: .9em;
 }
 .form-group{
@@ -183,7 +183,7 @@ export default {
     font-size: .9em;
     padding: .5em 0;
     border: 0;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #555;
     width: 100%;
     background-color: #fff;
 }
@@ -211,7 +211,7 @@ label{
     margin: -2px;
 }
 .day-active{
-    background-color: #673AB7;
+    background-color: #333;
 }
 
 
@@ -227,9 +227,7 @@ label{
     padding: 0 .5em;
 }
 
-.btn-cancel:hover{
-    color: crimson;
-}
+
 .avail{
     display: flex;
     flex-direction: column;
@@ -244,26 +242,31 @@ label{
 }
 .error{
     border-bottom: 1px solid crimson;
-    /* box-shadow: 0 0 1px 1px rgba(220, 20, 60, 0.1); */
 }
 @media (min-width:900px){
     .form-wrapper{
         background-color: #fff;
-        padding: 3em;
-        margin: 3em;
-        border-radius: 10px;
+        padding: 2em 3em;
+        border-radius: 3px;
     }
     .form-element{
         
         font-size: 1.2em;
+        min-width: 120px;
         padding: .5em;   
     }
-    .btn-icon:hover{
-        color: #673AB7
+    .btn-icon{
+        color: #fc8019
     }
     .day:hover{
-        background-color: #673AB7;
+        background-color: #333;
         cursor: pointer;
+    }
+    .btn-cancel{
+        color: #333;
+    }
+    .btn-cancel:hover{
+        color: crimson;
     }
 }
 

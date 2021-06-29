@@ -1,8 +1,8 @@
 import { login } from '@/services/customer/auth';
 
-const KEY_TOKEN = 'token';
-const KEY_EMAIL = 'email';
-const KEY_NAME = 'name';
+const KEY_TOKEN = 'cust_token';
+const KEY_EMAIL = 'cust_email';
+const KEY_NAME = 'cust_name';
 
 const auth = {
     state:  {
@@ -46,7 +46,7 @@ const auth = {
                             type: 'setName' ,
                             name });
 
-                        return email;
+                        return Promise.resolve(email);
                     });
         },
         customerLogout( context ){

@@ -2,12 +2,13 @@
     <div class="cart-item">
         <div class="detail name">{{name}}</div>
         <div class="details">
-            <div class="price">₹ {{price}}</div>
             <div class="qty">
                 <a href="" class="link-unstyled decrement" @click.prevent="increment(-1)"><i class="fas fa-minus"></i></a>
                 <p class="value">{{quantity}}</p>
                 <a href="" class="link-unstyled increment" @click.prevent="increment(1)"><i class="fas fa-plus"></i></a>
             </div>
+            <div class="price">₹ {{price}}</div>
+
         </div>
         
     </div>
@@ -61,14 +62,15 @@ export default {
 .cart-item{
     display: flex;
     width: 90%;
-    border-radius: 10px;
-    box-shadow: 0 1px 4px 1px rgba(0,0,0,0.2);
+    border-radius: 1px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,0.2);
     padding: 1em;
     justify-content: flex-end;
-    margin: .5em 0;
+    margin:0;
     position: relative;
-
-}
+    background-color: #fff;
+    
+}   
 .times{
     font-size: .8em;
 }
@@ -85,13 +87,14 @@ export default {
 .qty{
     display: flex;
     align-items: center;
-    border: 1px solid #333;
+    border: 1px solid #fc8019;
     justify-content: center;
-    background-color: #333;
+    background-color: #fc8019;
     font-size: .8em;
+    margin-bottom: .9em;
 }
 .price{
-    font-size: 1.2em;
+    font-size: 1em;
 }
 .link-unstyled{
     color: #fff;

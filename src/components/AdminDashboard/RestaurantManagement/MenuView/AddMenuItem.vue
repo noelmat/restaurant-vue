@@ -66,16 +66,22 @@ export default {
     },
     methods: {
         addItem(){
-            addMenuItem(this.form)
-                .then(menuItem => {
-                    this.$emit('menu-item-added', menuItem);
-                    this.resetForm();
-                    this.$emit('cancel')
-                })
-                .catch(error =>{
-                    this.$toast.error(`${error.message}`)
-            })
+            if(this.isValid){
+                addMenuItem(this.form)
+                    .then(menuItem => {
+                        this.$emit('menu-item-added', menuItem);
+                        this.resetForm();
+                        this.$emit('cancel')
+                    })
+                    .catch(error =>{
+                        this.$toast.error(`${error.message}`)
+                    })
+            }
+            else{
+                this.$toast.error('Please fill all the fields correctly');
+            }
         },
+        
         cancel(){
             this.resetForm();
             this.$emit('cancel');
@@ -90,6 +96,11 @@ export default {
                 description: '',
             }
         }
+    },
+    computed: {
+        isValid(){
+            return Boolean(this.form.name && this.form.price && this.form.spiceLevel && this.form.rating && this.form.description)
+        }
     }
 }
 </script>
@@ -97,7 +108,7 @@ export default {
 .menu-item-new{
     width: 90%;
     border-radius: 5px;
-    border: 1px solid #000;
+    border: 1px solid rgba(0,0,0,0.2);
     margin: .4em 0;
     display: flex;
     flex-direction: column;
@@ -106,14 +117,15 @@ export default {
     padding: .8em;
     border: 0;
     border-radius: 0;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
     margin: 2px;
     background-color: #fff;
 }
 select.form-element{
-    min-width: 40px;
-    max-width: 40px;
-}
+    min-width: 50px;
+    max-width: 50px;
+    padding-left: 0;
+    padding-right: 0;}
 .form-element:focus-visible{
     outline: 0;
 }
@@ -132,6 +144,10 @@ select.form-element{
 .form-line > *:first-child{
     margin: 0;
 }
+.description{
+    border-bottom: 0;
+}
+
 .btn-panel{
     display: flex;
 }
@@ -139,7 +155,7 @@ select.form-element{
     box-shadow: 0 1px 5px 1px rgba(0,0,0,0.2);
 }
 .btn-panel{
-    margin: 1em 0 0;
+    margin: .5em 0 ;
     display: flex;
     align-items: center;
     justify-content: center;;
@@ -148,12 +164,12 @@ select.form-element{
     border-radius: 50%;
     font-size: 2em;
     padding: 0 .5em;
-    color: #673AB7;
+    color: #fc8019;
 
 }
 
 .btn-cancel{
-    color: crimson;
+    color: #333;
 }
 #special{
     margin: .5em
@@ -167,7 +183,7 @@ select.form-element{
         color: #333;
     }
     .btn-icon:hover{
-        color: #673AB7
+        color: #fc8019;
     }
     .btn-cancel:hover{
         color: crimson;

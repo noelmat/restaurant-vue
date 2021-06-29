@@ -17,7 +17,14 @@
             </div>
             <AddButton @btn-click="addMenuItem" v-scroll-to="{el: '#add-new-item'}" />
         </div>
-        <ModalComponent v-if="edit"><AddEditMenu :menu="menu" @save-menu="saveMenu" @cancel='cancelEdit' title="Edit Menu"/></ModalComponent>
+        <ModalComponent v-if="edit">
+            <AddEditMenu 
+                :menu="menu"
+                @save-menu="saveMenu" 
+                @cancel='cancelEdit' 
+                title="Edit Menu"
+            />
+        </ModalComponent>
     </div>
 </template>
 <script>
@@ -34,6 +41,7 @@ export default {
         AddMenuItem,
         AddEditMenu
     },
+    title: "Menu View",
     data(){
         return{
             menu : {},
@@ -65,17 +73,18 @@ export default {
 
         addToMenu(event){
             addMenuItemToMenu(this.menu._id, {menuItem: event._id})
-            .then(()=>{
-                return getMenu(this.menu._id)  
-            })
-            .then(data =>{
-                Object.keys(data).forEach(key => {
-                this.$set(this.menu, key, data[key]);
+                .then(()=>{
+                    return getMenu(this.menu._id)  
                 })
-                this.$toast.success(`New Item Added : ${event.name}`)
-            })    
-            .catch(() => {
-            })
+                .then(data =>{
+                    Object.keys(data).forEach(key => {
+                    this.$set(this.menu, key, data[key]);
+                    })
+                    this.$toast.success(`New Item Added : ${event.name}`)
+                })    
+                .catch(error => {
+                    this.$toast.error(`${error} while adding item to menu`)
+                })
 
         },
         cancelNewItem(){
@@ -83,19 +92,17 @@ export default {
         },
         saveMenu(event){
             updateMenu(this.menu._id, event)
-                .then(()=>{
-                this.edit = false;
-                return getMenu(this.menu._id)                    
-            })
-            .then(data =>{
-                Object.keys(data).forEach(key => {
-                    this.$set(this.menu, key, data[key]);
+                .then(menu =>{
+                    this.edit = false;
+                    this.$set(this.menu, 'name', menu['name']);
+                    this.$set(this.menu, 'closeTime', menu['closeTime']);
+                    this.$set(this.menu, 'openTime', menu['openTime']);
+                    this.$set(this.menu, 'availability', menu['availability']);
+                    this.$toast.success('Menu updated');
+                })  
+                .catch(err => {
+                    this.$toast(err.message)
                 })
-                this.$toast.success('Menu updated');
-            })  
-            .catch(err => {
-                this.$toast(err.message)
-            })
         },
         cancelEdit(){
             this.edit = false;

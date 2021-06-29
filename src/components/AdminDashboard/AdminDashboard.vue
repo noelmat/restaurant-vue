@@ -10,6 +10,7 @@ import SidePanel from '@/components/AdminDashboard/SidePanel/SidePanel';
 
 export default {
     name: 'AdminDashboard',
+    title: 'Restaurant Dashboard',
     components: {
         MainPanel,
         SidePanel

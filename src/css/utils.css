@@ -11,12 +11,12 @@
 
 .btn{
     padding: 1em 1em;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .btn-primary{
-    border: 1px solid green;
-    background-color: green;
+    /* border: 1px solid green;
+    background-color: green; */
     color: #fff;
 }
 

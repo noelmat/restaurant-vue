@@ -6,19 +6,19 @@
             </h1>
             <form class="form" novalidate>
                 <div class="form-group">
-                    <input type="text" class="form-element" placeholder="Username" :class="{'error': $v.form.username.$error}"  v-model="form.username" @blur="$v.form.username.$touch()" @keyup.enter="login">
+                    <input type="text" id="username" class="form-element" placeholder="Username" :class="{'error': $v.form.username.$error}"  v-model="form.username" @blur="$v.form.username.$touch()" @keyup.enter="login">
                     <div class="validation" v-if="$v.form.username.$error">
                         Field required
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-element" :class="{'error': $v.form.password.$error}" placeholder="Password" v-model="form.password" @blur="$v.form.password.$touch" @keyup.enter="login">
+                    <input type="password" id="password" class="form-element" :class="{'error': $v.form.password.$error}" placeholder="Password" v-model="form.password" @blur="$v.form.password.$touch" @keyup.enter="login">
                     <div class="validation" v-if="$v.form.password.$error">
                         Field required
                     </div>
                 </div>
                 <div class="form-group">
-                    <a href="" class="link-unstyled btn btn-login" @click.prevent="login"> Login </a>
+                    <a href="" id="submit" class="link-unstyled btn btn-login" @click.prevent="login"> Login </a>
                 </div>
             </form>
         </div>
@@ -27,8 +27,10 @@
 </template>
 <script>
 import { required } from 'vuelidate/lib/validators';
+
 export default {
     name: 'RestaurantLogin',
+    title: "Restaurant User Login",
     data(){
         return {
             form: {
@@ -58,6 +60,7 @@ export default {
                     .then(()=>{
                         this.$router.push({name: 'dashboard-home'});
                         this.$toast.success('Logged in as Admin');
+                        
                     })
                     .catch(err=> {
                         this.$toast.error(`${err.message} occured`);
@@ -81,12 +84,8 @@ export default {
 }
 .wrapper {
     padding: 2em;
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
     box-shadow: 0 1px 4px 1px rgba(0,0,0,0.2);
-    border-radius: 10px;
+    border-radius: 3px;
     background-color:#fff;
     display: flex;
     flex-direction: column;
@@ -114,13 +113,15 @@ export default {
 }
 .form-element{
     padding: .8em;
-    border-radius: 10px;
+    border-radius: 3px;
     border: 0;
     font-size: 1.1em;
     border: 1px solid #333;
 }
 .form-element:focus-visible{
     outline: 0;
+    border: 0;
+    outline: solid 1px #fc8019 ;
 }
 .error{
     border: 1px solid #f79483;
@@ -128,7 +129,7 @@ export default {
 }
 .btn-login{
     color: #fff;
-    background: green;
+    background: #fc8019;
     text-align: center;
 }
 </style>

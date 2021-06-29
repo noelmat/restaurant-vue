@@ -76,9 +76,8 @@ const auth = {
             context.commit( 'setToken' , '' );
             context.commit( 'setUsername' , '');
             context.commit( 'setName' , '' );
-            context.commit( 'setRole' , '');
-
-            return Promise.resolve();
+            context.commit( 'setRole' , '');  
+            return Promise.resolve();          
         }
     }
 }
