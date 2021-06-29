@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <a href="#" @click.prevent="editUser" class="btn-edit">
+        <a href="#" @click.prevent="editUser" class="btn-edit link-unstyled">
             <i class="fas fa-edit"></i>Edit
         </a> 
         <div class="card-details">
@@ -8,7 +8,7 @@
                 <div class="name">
                     {{user.name}}
                 </div>
-                <img src="@/assets/user-icon.png" alt="" width="70%">
+                <img src="@/assets/user-icon.png" alt="" width="60%">
                 <div class="designation">
                     {{user.role}}
                 </div>
@@ -72,12 +72,12 @@ export default {
 <style scoped>
 .card{
     position: relative;
-    padding: 1em;
+    padding: 1em .5em;
     flex-basis: 30%;
     max-width: 280px;
     min-width: 200px; 
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 3px;
     margin-right: 3.33%;
     margin-bottom: 2em;
     box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.1);
@@ -86,7 +86,7 @@ export default {
     position: absolute;
     right: 1.1em;
     font-size: 0.9em;
-    color: #673AB7;
+    color: #fc8019;
 }
 
 .card-details{
@@ -97,7 +97,7 @@ export default {
 }
 @media (min-width:900px) {
     .card{
-        max-width: 280px;
+        max-width: 250px;
         min-width: 250px;
     }
 }
@@ -153,6 +153,7 @@ export default {
 .password{
     font-size: 0.9em;
     font-weight: bold;
+    margin-top: 5px;
 }
 .button-panel{
     margin-top: 20px;

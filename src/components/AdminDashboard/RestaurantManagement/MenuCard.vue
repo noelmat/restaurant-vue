@@ -1,11 +1,7 @@
 <template>
     <div class="card">
-        <div class="card-img-block">
-            <div class="overlay-container delete-container">
-                <a href="" class="delete" @click.prevent="deleteMenu" title="Delete Menu"><i class="fas fa-times"></i></a>
-            </div>
-            <img src="@/assets/breakfast.webp" alt="" width="100%" class="card-img">
-            <div class="overlay-container heading-container">
+        <div class="card-heading">
+            <div class="heading-container">
                 <h2 class="heading">{{menu.name}}</h2>
             </div>
         </div>
@@ -15,14 +11,12 @@
                 <div class="card-detail-data">
                     <span class="day" v-for="n in 7" :class="{'day-active': menu.availability[n-1]}" :key="n-1" >{{days[n-1]}}</span>
                 </div>
-                
             </div>
             <div class="card-detail">
                 <h3>Timing</h3>
                 <div class="card-detail-data">
                     <span>{{timeString}}</span>
                 </div>
-                
             </div>
         </div>
         <router-link :to="{name: 'dashboard-menu-detail', params: {menuId: menu._id}} " class="link-unstyled btn btn-primary">
@@ -50,7 +44,6 @@ export default {
             const closeTime = this.menu.closeTime;
             return `${getTimeString(formatTime(openTime.hours), formatTime( openTime.minutes))} - ${getTimeString(formatTime(closeTime.hours), formatTime( closeTime.minutes))}`
         }
-
     },
     methods: {
         deleteMenu(){
@@ -63,13 +56,11 @@ export default {
 .card{
     flex-basis: 30%;
     min-width: 210px;
-    /* width: 210px; */
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: #fff;
     box-shadow: 0 1px 5px 1px rgba(0,0,0,0.2);
     margin-right: 3.3%;
     display: flex;
-    align-items: center;
     flex-direction: column;
     margin-bottom: 2em;
     font-size: .8em;
@@ -78,12 +69,11 @@ export default {
     .card{
         flex-basis: 30%;
         min-width: 250px;
-        border-radius: 10px;
+        border-radius: 3px;
         background-color: #fff;
         box-shadow: 0 1px 5px 1px rgba(0,0,0,0.2);
         margin-right: 3.3%;
         display: flex;
-        align-items: center;
         flex-direction: column;
         margin-bottom: 2em;
         font-size: 1em;
@@ -104,7 +94,7 @@ export default {
     padding: 0.5em 0 0 0;
 }
 .card-detail-data{
-    margin: .8em 1em;
+    margin: .8em 0;
 }
 .overlay-container{
     position: absolute;
@@ -114,14 +104,8 @@ export default {
 .heading-container{
     
     bottom: 4px;
-    color: #fff;
-    padding: 1em 0;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0,0,0,0.8));
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    color: #333;
+    padding: 1.6em .4em 1em;
 }
 .delete-container{
     top: 0;
@@ -132,7 +116,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    
 }
 .delete{
     color: #fff;
@@ -161,14 +144,17 @@ export default {
     margin: -2px;
 }
 .day-active{
-    background-color: #673AB7;
+    background-color: #333;
 }
 .btn{
     margin-bottom: 1.5em;    
     padding: 0.5em 1em;
 }
 .btn-primary{
-    background-color: #673AB7;
+    background-color: #fc8019;
+    width: 100px;
+    text-align: center;
+    align-self: center;
 }
 
 </style>

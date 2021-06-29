@@ -34,7 +34,7 @@ export default {
 .wrapper{
     background-color: #fff;
     padding: 1em;
-    border-radius: 10px;
+    border-radius: 3px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,13 +48,13 @@ export default {
     display: flex;
     margin: 2em 0 0;
     width: 90%;
-    max-width: 180px;
+    max-width: 140px;
     /* min-width: 200px; */
     justify-content: space-between;
 }
 .btn{
     color: #fff;
-    border-radius: 5px;
+    border-radius: 3px;
     padding: .8em;
     font-size: .9em
 }

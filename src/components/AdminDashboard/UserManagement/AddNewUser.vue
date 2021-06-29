@@ -10,11 +10,6 @@
                     </div>
 
                 </div>
-                <!-- <div class="form-group">
-                    <div class="form-element">
-                        <label for="file-upload">User's Photo</label> <input type="file" accept="image/*" id="file-upload">
-                    </div>                    
-                </div> -->
                 <div class="form-group" >
                     <select name="role" :class="{'error': $v.form.role.$error}" v-model="form.role" @blur="$v.form.role.$touch()" class="form-element">
                         <option value="">--select-role--</option>
@@ -59,7 +54,7 @@
              
                 <div class="btn-panel">
                     <a href="" class="link-unstyled btn-icon" @click.prevent='saveUser' title="save user">
-                        <i class="far fa-check-circle"></i>
+                        <i class="fas fa-check-circle"></i>
                     </a>
                     <a href="" class="link-unstyled btn-icon btn-cancel" @click.prevent='cancel' title="cancel user">
                         <i class="far fa-times-circle"></i>
@@ -143,7 +138,7 @@ export default {
     padding: 1em;
     text-align: center;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 3px;
     font-size: .9em;
 }
 .form-element{
@@ -181,9 +176,10 @@ input{
     border-radius: 50%;
     font-size: 2em;
     padding: 0 .5em;
+    color: #fc8019;
 }
-.btn-icon:hover{
-    color: #673AB7
+.btn-cancel{
+    color: #333;
 }
 .btn-cancel:hover{
     color: crimson;

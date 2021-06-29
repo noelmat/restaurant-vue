@@ -15,22 +15,6 @@
             </div>
         </div>           
     </div>
-    <!-- <div class="menu-header" v-else>
-        <form action=""></form>
-            {{ menu.name }}
-
-        <a href="" class="link-unstyled btn btn-edit" @click.prevent="save"><i class="fas fa-check"></i> Save Changes</a>
-        <div class="menu-subheader">
-            <div class="subheading-item">
-                <p>Availability</p>
-                <span class="day" v-for="n in 7" :class="{'day-active': menu.availability[n-1]}" :key="n-1" >{{days[n-1]}}</span>
-            </div>
-            <div class="subheading-item">
-                <p>Timing:</p>
-                <p>{{timeString}}</p>
-            </div>
-        </div>           
-    </div> -->
 </template>
 <script>
 import {getTimeString, formatTime} from '@/utils/time-utils';
@@ -101,7 +85,7 @@ export default {
     margin: -2px;
 }
 .day-active{
-    background-color: #673AB7;
+    background-color: #333;
 }
 .btn-edit{
     color: #fff;
@@ -136,7 +120,7 @@ export default {
         top: -.4em;
     }
     .btn-edit:hover{
-        color: #673AB7;
+        color: #fc8019;
         background-color: #fff;
     }
 }

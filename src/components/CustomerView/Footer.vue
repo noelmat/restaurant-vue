@@ -1,30 +1,6 @@
 <template>
     <footer>
         <div class="footer">
-            <!-- <div class="contact" id="contact">
-                <div class="heading">
-                    <h2>Restaurant Details</h2>
-                </div>
-                <div class="details">
-                    <div class="address">
-                        <div class="line">
-                            {{addressLine1}}
-                        </div>
-                        <div class="line">
-                            {{addressLine2}}
-                        </div>
-                        <div class="line">
-                            <p class="timing">Timings</p>
-                            {{timeString}}
-                        </div>
-                    </div>
-                    
-                    <div class="primary-contact">
-                        <a :href="`tel://${address.primaryContact}`" class="link-unstyled"><i class="fas fa-phone-alt"></i> {{address.primaryContact}}</a>
-                    </div>
-                    
-                </div>
-            </div> -->
             <div class="footer-nav">
                 <span>Restaurant User? </span>
                 <router-link :to="{name: 'admin-login'}" class="link-unstyled nav-link btn">Login</router-link>

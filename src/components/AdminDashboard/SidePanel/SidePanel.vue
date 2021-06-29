@@ -13,7 +13,7 @@
             <i class="fas fa-shopping-cart"></i><span>Orders</span>
         </router-link>
         <router-link :to="{name: 'dashboard-menus'}" class="link-unstyled sidepanel-link" active-class="active">
-            <i class="fas fa-utensils"></i><span>Menus</span>
+            <i class="fas fa-utensils"></i><span>Menu</span>
         </router-link>
         <router-link :to="{name: 'dashboard-users'}" class="link-unstyled sidepanel-link" active-class="active">
             <i class="fas fa-users"></i><span>Users</span>
@@ -90,7 +90,8 @@ export default {
     display: block;
 }
 .active{
-    background-color: #8549ee;
+    color: #fc8019;
+    background-color: #f1f0f0;
 }
 @media (min-width: 900px) {
     .sidepanel{
