@@ -110,6 +110,7 @@ export default {
     }
     .panel{
         margin: 1em;
+        justify-content: space-between;
     }
 
     
