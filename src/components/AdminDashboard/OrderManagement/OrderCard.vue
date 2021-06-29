@@ -59,7 +59,7 @@ export default {
 </script>
 <style scoped>
 .panel{
-    margin: 1em 0;
+    margin: 1em .4em;
     background-color: #fff;
     box-shadow: 0 1px 4px 1px rgba(0,0,0,.1);
     border-radius: 3px;
@@ -103,5 +103,15 @@ export default {
     color: #fff;
     margin: 0 auto;
     margin-top: 5px;
+}
+@media (min-width: 900px) {
+    .wrapper{
+        margin : 1em;
+    }
+    .panel{
+        margin: 1em;
+    }
+
+    
 }
 </style>

@@ -50,4 +50,11 @@ export default {
     border-radius: 3px;
     color: green;
 }
+@media (min-width: 900px) {
+    .wrapper{
+        margin : 1em;
+    }
+
+    
+}
 </style>
