@@ -34,7 +34,7 @@ export default {
 </script>
 <style scoped>
 .wrapper{
-    margin : 3em;
+    margin : 1em;
 }
 .orders{
     display: flex;

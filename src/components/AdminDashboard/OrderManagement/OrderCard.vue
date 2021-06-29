@@ -59,11 +59,11 @@ export default {
 </script>
 <style scoped>
 .panel{
-    margin: 1em;
+    margin: 1em 0;
     background-color: #fff;
     box-shadow: 0 1px 4px 1px rgba(0,0,0,.1);
     border-radius: 3px;
-    width: 300px;
+    max-width: 280px;
     padding: 1em;
     display: flex;
     flex-direction: column;
