@@ -22,8 +22,8 @@
 
             </div>
             <div class="btn-panel">
-                <a href="" class="link-unstyled" title="Edit item" @click.prevent="edit"><i class="fas fa-edit"></i></a>
-                <a href="" class="link-unstyled" title="Delete item" @click.prevent="requestDelete"><i class="fas fa-times-circle"></i></a>
+                <a href="" id="edit" class="link-unstyled" title="Edit item" @click.prevent="edit"><i class="fas fa-edit"></i></a>
+                <a href="" id="delete" class="link-unstyled" title="Delete item" @click.prevent="requestDelete"><i class="fas fa-times-circle"></i></a>
             </div>
 
         </div>
@@ -76,12 +76,10 @@ export default {
             deleteMenuItem(this.item._id)
             .then(menuItem => {
                 this.$emit('delete-item', menuItem._id);
-                this.$toast.success(`${menuItem.name} deleted`, {
-                    timeout: 2000
-                })
+                this.$toast.success(`${menuItem.name} deleted`)
             })
             .catch(err =>{
-                console.log(err)
+                this.$toast.error(`${err.message}`);
             })
         }
     }

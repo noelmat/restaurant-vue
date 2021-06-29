@@ -1,6 +1,6 @@
 <template>
     <form novalidate class="menu-item-new">
-        <input type="text" class="form-element" name='name' v-model="form.name" placeholder="Item Name">
+        <input type="text" class="form-element" name='name' id="name" v-model="form.name" placeholder="Item Name">
         <div class="form-line">
             <input type="number" placeholder="Price" class="form-element" v-model="form.price">
             <select name="spice" id="spice" class="form-element" v-model="form.spiceLevel" >
@@ -23,12 +23,12 @@
             </select>
             <label for="special"><input type="checkbox" id="special" v-model="form.special"> specials</label> 
         </div>
-        <textarea placeholder="Item Description" name="description" v-model="form.description" id="" rows="2" class="form-element description"></textarea>    
+        <textarea placeholder="Item Description" name="description" v-model="form.description" id="description" rows="2" class="form-element description"></textarea>    
         <div class="btn-panel">
-            <a href="" class="link-unstyled btn-icon" @click.prevent='addItem' title="Save Item">
+            <a href="" id="btn-add" class="link-unstyled btn-icon" @click.prevent='addItem' title="Save Item">
                 <i class="far fa-check-circle"></i>
             </a>
-            <a href="" class="link-unstyled btn-icon btn-cancel" @click.prevent='cancel' title="Cancel">
+            <a href="" id="btn-cancel" class="link-unstyled btn-icon btn-cancel" @click.prevent='cancel' title="Cancel">
                 <i class="far fa-times-circle"></i>
             </a>
         </div>
@@ -37,7 +37,7 @@
 <script>
 import {updateMenuItem} from '@/services/admin/menuItems';
 export default {
-    name: 'AddMenuItem',
+    name: 'EditMenuItem',
     props:{
         menuItem: {
             default: function(){

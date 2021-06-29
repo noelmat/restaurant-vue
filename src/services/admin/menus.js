@@ -33,14 +33,14 @@ export const updateMenu = (id, menu) => {
 
 export const postMenu = (menu) => {
     return service({requiresAuth: true}).post(
-            'http://localhost:3000/restaurant/menu',
+            '/restaurant/menu',
             menu,
             )
 
 }
 export const deleteMenu = (id) => {
     return service({requiresAuth: true}).delete(
-            `http://localhost:3000/restaurant/menu/${id}`,
+            `/restaurant/menu/${id}`,
             )
 
 }
