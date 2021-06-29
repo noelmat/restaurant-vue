@@ -46,7 +46,7 @@ const auth = {
                             type: 'setName' ,
                             name });
 
-                        return email;
+                        return Promise.resolve(email);
                     });
         },
         customerLogout( context ){
