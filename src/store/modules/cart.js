@@ -83,7 +83,7 @@ const cart = {
                 item._id = _id;
             }
             if(payload.quantity + item.quantity <= 0){
-                removeFromCart(context.state.cartId, item)
+                return removeFromCart(context.state.cartId, item)
                     .then(cart => {
                         context.commit({
                             type: 'setCart',
@@ -92,7 +92,7 @@ const cart = {
                     })
             }
             else{
-                addToCart(context.state.cartId,item)
+                return addToCart(context.state.cartId,item)
                 .then(({cart, cartItem})=>{
                     context.commit({
                         type: 'setCartItem',
