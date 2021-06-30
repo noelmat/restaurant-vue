@@ -17,7 +17,7 @@
                 </div>
                 <div class="rating">
                     <span>{{ menuItem.rating}}</span>
-                    <i class="fa-star" v-for="n in 5" :class="{'fas': n<=menuItem.rating, 'far': !n<menuItem.rating}" :key="n"></i>
+                   <i class="fas fa-star" ></i>
                 </div>
                 <div class="price">
                     ₹ {{menuItem.price}}

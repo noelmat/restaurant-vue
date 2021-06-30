@@ -15,7 +15,9 @@
                 </div>
             </div>
         </div>
-        <a href="" class="link-unstyled btn-next" @click.prevent="changeStatus">Mark {{actions[order.status]}}</a>
+        <a href="" class="link-unstyled btn-next" :class="{'disabled': processing}" @click.prevent="changeStatus">
+            {{processing? 'Processing request' :"Mark "+actions[order.status]}}
+        </a>
     </div>
 </template>
 <script>
@@ -32,18 +34,25 @@ export default {
                 'received': 'in-progress',
                 'in-progress': 'dispatched',
                 'dispatched': 'completed',
-            }
+            },
+            processing : false
         }
     },
     methods:{
         changeStatus(){
-            updateOrderStatus(this.order._id, this.actions[this.order.status])
+            if(!this.processing){
+                this.processing = true;
+                updateOrderStatus(this.order._id, this.actions[this.order.status])
                 .then(()=>{
+                    this.processing = false;
                     this.$toast.success(`Mark order as ${this.actions[this.order.status]}`)
                 })
                 .catch(error=>{
+                    this.processing = false;
                     this.$toast.error(`${error.message} occured`)
                 })
+            }
+            
         }        
     },
     computed:{
@@ -103,6 +112,10 @@ export default {
     color: #fff;
     margin: 0 auto;
     margin-top: 5px;
+}
+
+.disabled{
+    background-color: 777;
 }
 @media (min-width: 900px) {
     .wrapper{
