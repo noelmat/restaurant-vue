@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <a href="" id="submit" class="link-unstyled btn btn-login" @click.prevent="login"> Login </a>
+                    <a href="" id="submit" class="link-unstyled btn btn-login" :class="{'disabled': loading}" @click.prevent="login"> {{loading?"Logging In":"Login"}} </a>
                 </div>
             </form>
         </div>
@@ -36,7 +36,8 @@ export default {
             form: {
                 username: '',
                 password: ''
-            }
+            },
+            loading: false
         }
     },
     validations: {
@@ -53,16 +54,19 @@ export default {
         login(){
             this.$v.form.$touch()
             if(!this.$v.form.$invalid){
+                this.loading = true;
                 this.$store.dispatch({
                         type: 'login',
                         credentials: this.form
                     })
                     .then(()=>{
+                        this.loading = false;
                         this.$router.push({name: 'dashboard-home'});
                         this.$toast.success('Logged in as Admin');
                         
                     })
                     .catch(err=> {
+                        this.loading = false;
                         this.$toast.error(`${err.message} occured`);
                     })
             }else{
@@ -132,4 +136,8 @@ export default {
     background: #fc8019;
     text-align: center;
 }
+.disabled{
+    background-color: #aaa;
+}
+
 </style>
