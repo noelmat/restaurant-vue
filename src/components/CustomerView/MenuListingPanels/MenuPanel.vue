@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         showMenu(index){
-            // this.selected = index;
+            this.selected = index;
             this.$emit('show-menu', index);
         }
     }
