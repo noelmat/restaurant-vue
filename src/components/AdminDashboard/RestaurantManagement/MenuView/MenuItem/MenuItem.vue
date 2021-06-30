@@ -18,7 +18,7 @@
             </div>
             <div class="rating">
                 <span>{{ item.rating}}</span>
-                <i class="fa-star" v-for="n in 5" :class="{'fas': n<=item.rating, 'far': !n<item.rating}" :key="n"></i>
+                <i class="fa-star" v-for="n in 5" :class="{'fas': n<=item.rating, 'far': !n<item.rating, 'fas': item.rating===0}" :key="n"></i>
 
             </div>
             <div class="btn-panel">

@@ -66,7 +66,7 @@ export default {
     },
     methods: {
         addItem(){
-            if(this.isValid()){
+            if(this.isValid){
                 updateMenuItem(this.menuItem._id, this.form)
                 .then(menuItem => {
                     this.$emit('menu-item-updated', menuItem);
@@ -81,9 +81,6 @@ export default {
             }
             
         },
-        isValid(){
-            return Boolean(this.form.name && this.form.price && this.form.spiceLevel && this.form.rating && this.form.description)
-        },
         cancel(){
             this.resetForm();
             this.$emit('cancel');
@@ -97,6 +94,11 @@ export default {
                 special: false,
                 description: '',
             }
+        }
+    },
+    computed: {
+        isValid(){
+            return Boolean(this.form.name && this.form.price>0 && this.form.spiceLevel !=='' && this.form.rating !=='' && this.form.description)
         }
     }
 }
