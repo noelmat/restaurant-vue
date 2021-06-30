@@ -63,7 +63,7 @@ export default {
     background-color: #fff;
     box-shadow: 0 1px 4px 1px rgba(0,0,0,.1);
     border-radius: 3px;
-    max-width: 280px;
+    max-width: 240px;
     padding: 1em;
     display: flex;
     flex-direction: column;
@@ -111,6 +111,7 @@ export default {
     .panel{
         margin: 1em;
         justify-content: space-between;
+        max-width: 260px;
     }
 
     
