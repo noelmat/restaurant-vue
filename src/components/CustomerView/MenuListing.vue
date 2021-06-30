@@ -8,7 +8,7 @@
     </div>
 </template>
 <script>
-import {getMenus, getMenu} from '@/services/admin/menus'
+import {getMenus} from '@/services/admin/menus'
 import MenuPanel from './MenuListingPanels/MenuPanel.vue';
 import ItemsPanel from './MenuListingPanels/ItemsPanel.vue';
 export default {
@@ -30,16 +30,18 @@ export default {
         loadMenus(){
             getMenus()
                 .then(menus => {
-                    this.menus.push(...menus);
+                    this.menus = menus;
+                    // this.menus.push(...menus);
                 })
         },
         showMenu(event){
-            getMenu(event._id)
-            .then(menu => {
-                Object.keys(menu).forEach(key => {
-                    this.$set(this.currentMenu, key, menu[key]);
-                 })
-            })
+            this.currentMenu = this.menus[event];
+            // getMenu(event._id)
+            // .then(menu => {
+            //     Object.keys(menu).forEach(key => {
+            //         this.$set(this.currentMenu, key, menu[key]);
+            //      })
+            // })
         }
     }
 }

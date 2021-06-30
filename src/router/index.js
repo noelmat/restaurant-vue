@@ -15,6 +15,7 @@ import CustomerDashboard from '@/components/CustomerDashboard/CustomerDashboard'
 import CustomerHome from '@/components/CustomerDashboard/CustomerHome/CustomerHome';
 import CustomerOrders from '@/components/CustomerDashboard/CustomerOrders/CustomerOrders';
 import OrderPage from '@/components/CustomerView/OrderPage';
+import PageNotFound from '@/components/PageNotFound';
 
 import Vue from 'vue';
 
@@ -32,6 +33,7 @@ Vue.component('CustomerDashboard', CustomerDashboard);
 Vue.component('CustomerHome', CustomerHome);
 Vue.component('CustomerOrders', CustomerOrders);
 Vue.component('OrderPage', OrderPage);
+Vue.component('PageNotFound', PageNotFound);
 
 const adminMeta = {
     requiresAdminAuth : true, requiresCustAuth : false
@@ -141,6 +143,11 @@ const router = new Router({
                     component: CustomerOrders
                 }
             ]
+        },
+        {
+            name: 'page-not-found',
+            path: '*',
+            component: PageNotFound
         }
     ]
 })

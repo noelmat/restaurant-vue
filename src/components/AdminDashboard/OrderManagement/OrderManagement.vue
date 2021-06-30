@@ -34,7 +34,7 @@ export default {
 </script>
 <style scoped>
 .wrapper{
-    margin : 3em;
+    margin : 1em;
 }
 .orders{
     display: flex;
@@ -49,5 +49,12 @@ export default {
     border: 1px solid green;
     border-radius: 3px;
     color: green;
+}
+@media (min-width: 900px) {
+    .wrapper{
+        margin : 1em;
+    }
+
+    
 }
 </style>

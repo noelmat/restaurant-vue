@@ -99,7 +99,7 @@ export default {
     },
     computed: {
         isValid(){
-            return Boolean(this.form.name && this.form.price && this.form.spiceLevel && this.form.rating && this.form.description)
+            return Boolean(this.form.name && this.form.price > 0 && this.form.spiceLevel !== '' && this.form.rating != '' && this.form.description)
         }
     }
 }

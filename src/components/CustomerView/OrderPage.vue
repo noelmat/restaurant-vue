@@ -14,9 +14,9 @@
             </AddressCard>
         </div>
         <div class="btn-panel">
-            <a href="" class="link-unstyled btn btn-cta" @click.prevent="placeOrder">
+            <a href="" class="link-unstyled btn btn-cta" :class="{'disabled': processing}" @click.prevent="placeOrder">
                 <span>{{itemString}}  | ₹ {{cartTotal}}</span>
-                Proceed to Pay
+                {{processing? "Processing Order" : "Proceed to Pay"}}
             </a>
         </div>
 
@@ -38,7 +38,8 @@ export default {
     data(){
         return {
             selectedAddress: '',
-            customer : {}
+            customer : {},
+            processing: false
         }
     },
     created(){
@@ -65,21 +66,26 @@ export default {
             this.selectedAddress = event;
         },
         placeOrder(){
-            if(!this.selectedAddress){
-               return this.$toast.info("Please select an address");
+            if(!this.processing){
+                if(!this.selectedAddress){
+                    return this.$toast.info("Please select an address");
+                }
+                const orderDetails = this.createOrder();
+                this.processing = true
+                placeOrder(orderDetails)
+                    .then(()=>{
+                        this.processing = false;
+                        this.$router.push({name: 'home'});
+                        this.$toast.success('Order has been placed Successfully');
+                        return this.$store.dispatch({
+                                    type: "loadSession"
+                                })
+                    })
+                    .catch(error =>{
+                        this.processing = false;
+                        this.$toast.error(`${error.message}`);
+                    })
             }
-            const orderDetails = this.createOrder();
-            placeOrder(orderDetails)
-            .then(()=>{
-                this.$router.push({name: 'home'});
-                this.$toast.success('Order has been placed Successfully');
-                return this.$store.dispatch({
-                            type: "loadSession"
-                        })
-            })
-            .catch(error =>{
-                this.$toast.error(`${error.message}`);
-            })
         },
         createOrder(){
      
@@ -195,5 +201,8 @@ h1{
 
 .addressSelected{
     background-color: #fc7f1957;
+}
+.disabled{
+    background-color: #777;
 }
 </style>

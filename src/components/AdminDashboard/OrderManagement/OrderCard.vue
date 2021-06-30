@@ -15,7 +15,9 @@
                 </div>
             </div>
         </div>
-        <a href="" class="link-unstyled btn-next" @click.prevent="changeStatus">Mark {{actions[order.status]}}</a>
+        <a href="" class="link-unstyled btn-next" :class="{'disabled': processing}" @click.prevent="changeStatus">
+            {{processing? 'Processing request' :"Mark "+actions[order.status]}}
+        </a>
     </div>
 </template>
 <script>
@@ -32,18 +34,25 @@ export default {
                 'received': 'in-progress',
                 'in-progress': 'dispatched',
                 'dispatched': 'completed',
-            }
+            },
+            processing : false
         }
     },
     methods:{
         changeStatus(){
-            updateOrderStatus(this.order._id, this.actions[this.order.status])
+            if(!this.processing){
+                this.processing = true;
+                updateOrderStatus(this.order._id, this.actions[this.order.status])
                 .then(()=>{
+                    this.processing = false;
                     this.$toast.success(`Mark order as ${this.actions[this.order.status]}`)
                 })
                 .catch(error=>{
+                    this.processing = false;
                     this.$toast.error(`${error.message} occured`)
                 })
+            }
+            
         }        
     },
     computed:{
@@ -59,11 +68,11 @@ export default {
 </script>
 <style scoped>
 .panel{
-    margin: 1em;
+    margin: 1em .4em;
     background-color: #fff;
     box-shadow: 0 1px 4px 1px rgba(0,0,0,.1);
     border-radius: 3px;
-    width: 300px;
+    max-width: 240px;
     padding: 1em;
     display: flex;
     flex-direction: column;
@@ -103,5 +112,21 @@ export default {
     color: #fff;
     margin: 0 auto;
     margin-top: 5px;
+}
+
+.disabled{
+    background-color: 777;
+}
+@media (min-width: 900px) {
+    .wrapper{
+        margin : 1em;
+    }
+    .panel{
+        margin: 1em;
+        justify-content: space-between;
+        max-width: 260px;
+    }
+
+    
 }
 </style>

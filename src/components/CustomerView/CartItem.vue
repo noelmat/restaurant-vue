@@ -3,14 +3,15 @@
         <div class="detail name">{{name}}</div>
         <div class="details">
             <div class="qty">
-                <a href="" class="link-unstyled decrement" @click.prevent="increment(-1)"><i class="fas fa-minus"></i></a>
+                <a href="" class="link-unstyled decrement"  @click.prevent="increment(-1)"><i class="fas fa-minus"></i></a>
                 <p class="value">{{quantity}}</p>
                 <a href="" class="link-unstyled increment" @click.prevent="increment(1)"><i class="fas fa-plus"></i></a>
             </div>
             <div class="price">₹ {{price}}</div>
-
         </div>
-        
+        <div class="loading" v-if="loading">
+            Processing
+        </div>
     </div>
 </template>
 <script>
@@ -19,6 +20,11 @@ export default {
     props: [
         'cartItem',
     ],
+    data(){
+        return {
+            loading : false
+            }
+    },
     computed: {
         item(){
             return this.cartItem.item;
@@ -35,10 +41,7 @@ export default {
     },
     methods:{
         increment(qty){
-            // let message = 'Added';
-            // if(qty < 0){
-            //     message = 'Removed';
-            // }
+            this.loading = true;
             const item = {}
             item._id = this.cartItem._id;
             item.quantity = qty;
@@ -47,12 +50,10 @@ export default {
                 item,
                 quantity: this.quantity
             }).then(()=>{
-                // this.$toast.success(`${this.item.name} ${message}`)
-            })
-
-            this.$store.dispatch({
-                type: 'addToCart',
-
+                this.loading = false;
+            }).catch(err=>{
+                this.loading = false;
+                this.$toast.success(`${err.message}`);
             })
         }
     }
@@ -117,5 +118,21 @@ export default {
 }
 .delete-item{
     /* color: #fc8019; */
+}
+.cart-loading{
+    background-color: rgba(0,0,0,0.2);
+}
+.loading{
+    position: absolute;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 99;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

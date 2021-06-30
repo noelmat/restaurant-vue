@@ -26,9 +26,9 @@ export default {
         }
     },
     methods: {
-        showMenu(index, menu){
-            this.selected = index;
-            this.$emit('show-menu', menu);
+        showMenu(index){
+            // this.selected = index;
+            this.$emit('show-menu', index);
         }
     }
 }
