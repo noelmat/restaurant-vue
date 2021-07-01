@@ -18,7 +18,12 @@
                 <div class="form-group">
                     <input type="text" id="email" class="form-element" placeholder="Email" v-model="form.email" :class="{'error': $v.form.email.$error}" @blur="$v.form.email.$touch()" @keyup.enter="login">
                     <div class="validation" v-if="$v.form.email.$error">
-                        Field required
+                        <template v-if="!$v.form.email.required">
+                            Field required
+                        </template>
+                        <template v-else-if="!$v.form.email.email">
+                            Not a valid email
+                        </template>
                     </div>
 
                 </div>
@@ -100,7 +105,7 @@
     </div>
 </template>
 <script>
-import { required, sameAs, minLength } from 'vuelidate/lib/validators';
+import { required, sameAs, minLength, email } from 'vuelidate/lib/validators';
 import { register } from '@/services/customer/auth';
 export default {
     name: 'CustomerRegistration',
@@ -132,6 +137,7 @@ export default {
             },
             email: {
                 required,
+                email,
             },
             password: {
                 required,
