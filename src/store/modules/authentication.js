@@ -19,16 +19,16 @@ const auth = {
         }
     },
     mutations: {
-        setToken(state, payload){
+        setAuthToken(state, payload){
             state.token = payload.token;
         },
-        setUsername(state, payload){
+        setAuthUsername(state, payload){
             state.username = payload.username;
         },
-        setName(state, payload){
+        setAuthName(state, payload){
             state.name = payload.name;
         },
-        setRole(state, payload){
+        setAuthRole(state, payload){
             state.role = payload.role;
         },
         setConfirmLogout(state, payload){
@@ -47,16 +47,16 @@ const auth = {
                         localStorage.setItem( KEY_ROLE, role );
 
                         context.commit({
-                            type: 'setToken' ,
+                            type: 'setAuthToken' ,
                             token: token });
                         context.commit( {
-                            type: 'setUsername' ,
+                            type: 'setAuthUsername' ,
                             username });
                         context.commit( {
-                            type: 'setName' ,
+                            type: 'setAuthName' ,
                             name });
                         context.commit( {
-                            type: 'setRole' ,
+                            type: 'setAuthRole' ,
                             role });
 
                         return username;
@@ -73,10 +73,10 @@ const auth = {
             localStorage.removeItem(KEY_USERNAME);
             localStorage.removeItem(KEY_NAME);
             localStorage.removeItem(KEY_ROLE);
-            context.commit( 'setToken' , '' );
-            context.commit( 'setUsername' , '');
-            context.commit( 'setName' , '' );
-            context.commit( 'setRole' , '');  
+            context.commit( 'setAuthToken' , '' );
+            context.commit( 'setAuthUsername' , '');
+            context.commit( 'setAuthName' , '' );
+            context.commit( 'setAuthRole' , '');  
             return Promise.resolve();          
         }
     }

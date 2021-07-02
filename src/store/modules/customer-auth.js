@@ -16,13 +16,13 @@ const auth = {
         }
     },
     mutations: {
-        setToken(state, payload){
+        setCustomerToken(state, payload){
             state.token = payload.token;
         },
-        setEmail(state, payload){
+        setCustomerEmail(state, payload){
             state.email = payload.email;
         },
-        setName(state, payload){
+        setCustomerName(state, payload){
             state.name = payload.name;
         },
     },
@@ -37,13 +37,13 @@ const auth = {
                         localStorage.setItem( KEY_NAME, name);
 
                         context.commit({
-                            type: 'setToken' ,
+                            type: 'setCustomerToken' ,
                             token: token });
                         context.commit( {
-                            type: 'setEmail' ,
+                            type: 'setCustomerEmail' ,
                             email });
                         context.commit( {
-                            type: 'setName' ,
+                            type: 'setCustomerName' ,
                             name });
 
                         return Promise.resolve(email);
@@ -53,9 +53,9 @@ const auth = {
             localStorage.removeItem(KEY_TOKEN);
             localStorage.removeItem(KEY_EMAIL);
             localStorage.removeItem(KEY_NAME);
-            context.commit( 'setToken' , '' );
-            context.commit( 'setEmail' , '');
-            context.commit( 'setName' , '' );
+            context.commit( 'setCustomerToken' , '' );
+            context.commit( 'setCustomerEmail' , '');
+            context.commit( 'setCustomerName' , '' );
 
             return Promise.resolve();
         }
